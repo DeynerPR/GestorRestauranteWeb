@@ -10,12 +10,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
+//========================================
 builder.Services.AddScoped<GestorDeRestaurante.BS.IRepositorioRestaurante, GestorDeRestaurante.BS.RepositorioRestaurante>();
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<GestorDeRestaurante.DA.DbContexto>(x => x.UseSqlServer(connectionString));
-
+builder.Services.AddMemoryCache();
+//=========================================
 
 
 var app = builder.Build();

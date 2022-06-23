@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorDeRestaurante.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace GestorDeRestaurante.Model
     public class Orden
     {
         public int Id { get; set; }
-        public int MesaId { get; set; }
-        public int PlatilloId { get; set; }
+        public int Id_Mesa { get; set; }
+        public int Id_Menu { get; set; }
         public int Cantidad { get; set; }
         public EstadoOrden Estado { get; set; }
 

@@ -16,6 +16,11 @@ namespace GestorDeRestaurante.BS
         Model.Medida ObtengaLaMedida(int Id);
 
         //Ingrediente (Ingredientes)
+        public List<Model.Ingrediente> ObtengaLaListaDeIngredientesGeneral();
+
+        public List<Model.Medida> ObtengaLaListaDeMedidasGeneral();
+
+        public bool AgregarNuevoIngrediente(Model.Ingrediente ingrediente);
 
 
         //Platillo (Menu)

@@ -10,11 +10,10 @@ namespace GestorDeRestaurante.Model
     public class PlatilloIngredientes
     {
         public int Id { get; set; }
-        public int PlatilloId { get; set; }
-        public int IngredienteId { get; set; }
-        public int MedidaId { get; set; }
-
+        public int Id_Menu { get; set; }
+        public int Id_Ingredientes { get; set; }
         public int Cantidad { get; set; }
+        public int Id_Medidas { get; set; }
 
         [Display(Name = "Valor Aproximado")]
         public int ValorAproximado { get; set; }
