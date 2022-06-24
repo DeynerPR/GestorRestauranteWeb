@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace GestorDeRestaurante.UI.Controllers
 {
@@ -11,57 +11,49 @@ namespace GestorDeRestaurante.UI.Controllers
         // GET: IngredientesController
         public async Task<IActionResult> Index()
         {
+
+            List<Model.Ingrediente> losPlatillosDetallados;
+
             try
             {
-
-                List<Model.Ingrediente> losPlatillosDetallados;
-
                 var httpClient = new HttpClient();
-
-                var response = await httpClient.GetAsync("https://localhost:7078/api/Ingredientes/ObtengaLosIngredientes");
+                var response = await httpClient.GetAsync("https://localhost:7181/api/Ingrediente/ObtengaLosIngredientes");
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                losPlatillosDetallados = JsonConvert.DeserializeObject<List<Model.Ingrediente>>(apiResponse);
-
+                losPlatillosDetallados = JsonConvert.DeserializeObject<List<GestorDeRestaurante.Model.Ingrediente>>(apiResponse);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
-
-
-
-
-
-
-
-
-            return View();
+            return View(losPlatillosDetallados);
         }
 
 
-        /*
+        
         public ActionResult Agregar()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async ActionResult Agregar(Model.Ingrediente elIngrediente)
+        public async Task<IActionResult> Agregar(Model.Ingrediente elIngrediente)
         {
             try
             {
-               
+                var httpClient = new HttpClient();
 
+                string json = JsonConvert.SerializeObject(elIngrediente);
 
+                var buffer = System.Text.Encoding.UTF8.GetBytes(json);
 
-                if (SI.Controllers.IngredientesController. == false) {
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Agregar));
-                }
+                var byteContent = new ByteArrayContent(buffer);
+
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                await httpClient.PostAsync("https://localhost:7181/api/Ingrediente/", byteContent);
+
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -71,7 +63,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
 
 
-        */
+        
 
 
 
