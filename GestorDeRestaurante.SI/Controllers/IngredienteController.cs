@@ -9,35 +9,61 @@ namespace GestorDeRestaurante.SI.Controllers
     public class IngredienteController : ControllerBase
     {
 
-
         private readonly BS.IRepositorioRestaurante ElRepositorio;
 
-        public IngredienteController(BS.IRepositorioRestaurante elRepo)
+        public IngredienteController(BS.IRepositorioRestaurante repositorio)
         {
-            ElRepositorio = elRepo;
+            ElRepositorio = repositorio;
         }
 
 
 
-        // GET: api/<IngredientesController>
+        // GET: api/<IngredienteController>
         [HttpGet("ObtengaLosIngredientes")]
         public IEnumerable<GestorDeRestaurante.Model.Ingrediente> ObtengaLosIngredientes()
         {
-            List<Model.Ingrediente> losIngredientes = ElRepositorio.ObtengaLaListaDeIngredientesGeneral();
+            List<Model.Ingrediente> losIngredientes = ElRepositorio.ObtengaLaListaDeIngredientes();
             return losIngredientes;
-        }//Fin metodo
+        }
 
-
-        [HttpPost]
-        public IActionResult Post([FromBody] GestorDeRestaurante.Model.Ingrediente elIngrediente)
+        // POST api/<MedidaController>
+        [HttpPost("AgregueElIngrediente")]
+        public IActionResult AgregueElIngrediente([FromBody] GestorDeRestaurante.Model.Ingrediente elIngrediente)
         {
             if (ModelState.IsValid) {
-                ElRepositorio.AgregarNuevoIngrediente(elIngrediente);
+                ElRepositorio.AgregueElIngrediente(elIngrediente);
                 return Ok(elIngrediente);
             }
             else {
                 return BadRequest(ModelState);
             }
-        }//Fin metodo
+        }
+
+        // GET: api/<IngredienteController>
+        [HttpGet("ObtenerIngredientePorId")]
+        public GestorDeRestaurante.Model.Ingrediente ObtenerIngredientePorId(int id)
+        {
+            Model.Ingrediente elIngrediente;
+            elIngrediente = ElRepositorio.ObtenerIngredientePorId(id);
+
+            return elIngrediente;
+        }
+
+        // PUT api/<IngredienteController>
+        [HttpPut("EditarIngrediente")]
+        public IActionResult EditarIngrediente([FromBody] GestorDeRestaurante.Model.Ingrediente ingrediente)
+        {
+
+            if (ModelState.IsValid)
+            {
+                ElRepositorio.EditarIngrediente(ingrediente);
+
+                return Ok(ingrediente);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
     }
 }

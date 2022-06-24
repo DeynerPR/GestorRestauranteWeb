@@ -1,10 +1,10 @@
-﻿@model IEnumerable<GestorDeRestaurante.Model.Ingrediente>
+﻿@model IEnumerable<GestorDeRestaurante.Model.Medida>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Catálogo de Ingredientes</h1>
+<h1>Catálogo de Medidas</h1>
 
 <p>
     <a asp-action="Agregar">Agregar</a>
@@ -32,7 +32,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-                @Html.ActionLink("Detalle", "Detalle", new { id=item.Id }) 
+                @Html.ActionLink("Detalle", "Detalle", new { id=item.Id })
             </td>
         </tr>
 }

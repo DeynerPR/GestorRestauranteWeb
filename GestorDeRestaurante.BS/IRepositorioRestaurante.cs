@@ -9,27 +9,35 @@ namespace GestorDeRestaurante.BS
     public interface IRepositorioRestaurante
     {
         //Medida (Medidas)
-        List<Model.Medida> ObtengaLaListaDeMedidas();
+        public List<Model.Medida> ObtengaLaListaDeMedidas();
+        public bool ExisteLaMedida(string nombre);
         void AgregueLaMedida(Model.Medida medida);
         Model.Medida ObtenerMedidaPorId(int Id);
         void EditarMedida(Model.Medida medida);
         Model.Medida ObtengaLaMedida(int Id);
+        public string ObtengaElNombreDeLaMedida(int idDMedidaEnPlatillo, List<Model.Medida> lasMedidas);
+
 
         //Ingrediente (Ingredientes)
-        public List<Model.Ingrediente> ObtengaLaListaDeIngredientesGeneral();
-
-        public List<Model.Medida> ObtengaLaListaDeMedidasGeneral();
-
-        public void AgregarNuevoIngrediente(Model.Ingrediente ingrediente);
+        public List<Model.Ingrediente> ObtengaLaListaDeIngredientes();
+        public bool ExisteElIngrediente(string nombre);
+        public void AgregueElIngrediente(Model.Ingrediente ingrediente);
+        Model.Ingrediente ObtenerIngredientePorId(int Id);
+        void EditarIngrediente(Model.Ingrediente ingrediente);
+        public List<Model.DetalleDePlatillo> ObtengaLosPlatillosQueUsanEsteIngrediente(int idIngrediente);
+        public string ObtengaElNombreDelIngrediente(int idIngredienteElegido, List<Model.Ingrediente> losIngredientes);
 
 
         //Platillo (Menu)
 
 
+
         //PlatilloIngredientes (MenuIngredientes)
 
 
+
         //Mesa (Mesas)
+
 
 
         //Orden (MesaOrden)
