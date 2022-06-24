@@ -1,5 +1,6 @@
 ﻿
 
+using GestorDeRestaurante.Model;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace GestorDeRestaurante.BS
@@ -60,9 +61,6 @@ namespace GestorDeRestaurante.BS
         {
             throw new NotImplementedException();
         }
-
-
-        public Byte[] imagen { get; set; }
 
 
 

@@ -8,36 +8,44 @@ namespace GestorDeRestaurante.SI.Controllers
     [ApiController]
     public class IngredienteController : ControllerBase
     {
-        // GET: api/<IngredientesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+
+        private readonly BS.IRepositorioRestaurante ElRepositorio;
+
+        public IngredienteController(BS.IRepositorioRestaurante elRepo)
         {
-            return new string[] { "value1", "value2" };
+            ElRepositorio = elRepo;
         }
 
-        // GET api/<IngredientesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+
 
         // POST api/<IngredientesController>
+        [HttpPost()]
+        public void Agregar([FromBody] string value)
+        {
+
+
+
+
+        }//Fin post
+
+
+
+        // GET: api/<IngredientesController>
+        [HttpGet("ObtengaLosIngredientes")]
+        public IEnumerable<Model.Ingrediente> ObtengaLosIngredientes()
+        {
+            List<Model.Ingrediente> losIngredientes = ElRepositorio.ObtengaLaListaDeIngredientesGeneral();
+            return losIngredientes;
+        }//Fin metodo
+
+
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public bool AgregarNuevoIngrediente(Model.Ingrediente elIngrediente)
         {
-        }
-
-        // PUT api/<IngredientesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<IngredientesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            bool resultado = ElRepositorio.AgregarNuevoIngrediente(elIngrediente);
+            return resultado;
+        }//Fin metodo
     }
 }
