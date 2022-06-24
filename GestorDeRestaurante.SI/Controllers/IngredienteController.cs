@@ -19,33 +19,25 @@ namespace GestorDeRestaurante.SI.Controllers
 
 
 
-        // POST api/<IngredientesController>
-        [HttpPost()]
-        public void Agregar([FromBody] string value)
-        {
-
-
-
-
-        }//Fin post
-
-
-
         // GET: api/<IngredientesController>
         [HttpGet("ObtengaLosIngredientes")]
-        public IEnumerable<Model.Ingrediente> ObtengaLosIngredientes()
+        public IEnumerable<GestorDeRestaurante.Model.Ingrediente> ObtengaLosIngredientes()
         {
             List<Model.Ingrediente> losIngredientes = ElRepositorio.ObtengaLaListaDeIngredientesGeneral();
             return losIngredientes;
         }//Fin metodo
 
 
-
         [HttpPost]
-        public bool AgregarNuevoIngrediente(Model.Ingrediente elIngrediente)
+        public IActionResult Post([FromBody] GestorDeRestaurante.Model.Ingrediente elIngrediente)
         {
-            bool resultado = ElRepositorio.AgregarNuevoIngrediente(elIngrediente);
-            return resultado;
+            if (ModelState.IsValid) {
+                ElRepositorio.AgregarNuevoIngrediente(elIngrediente);
+                return Ok(elIngrediente);
+            }
+            else {
+                return BadRequest(ModelState);
+            }
         }//Fin metodo
     }
 }

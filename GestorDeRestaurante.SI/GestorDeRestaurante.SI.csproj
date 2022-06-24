@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GestorDeRestaurante.BS\GestorDeRestaurante.BS.csproj" />
-    <ProjectReference Include="..\GestorDeRestaurante.DA\GestorDeRestaurante.DA.csproj" />
     <ProjectReference Include="..\GestorDeRestaurante.Model\GestorDeRestaurante.Model.csproj" />
   </ItemGroup>
 

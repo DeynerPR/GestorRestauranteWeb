@@ -8,14 +8,6 @@ namespace GestorDeRestaurante.UI.Controllers
     {
 
 
-
-
-        private HttpClient httpClient;
-
-
-
-
-
         // GET: IngredientesController
         public async Task<IActionResult> Index()
         {

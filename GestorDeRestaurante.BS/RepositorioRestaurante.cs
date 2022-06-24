@@ -11,7 +11,7 @@ namespace GestorDeRestaurante.BS
 
 
         private readonly IMemoryCache ElCache;
-        private DA.DbContexto ElContexto;
+        private DA.DbContexto ElContextoBD;
 
         int idSeleccionado;
 
@@ -22,7 +22,7 @@ namespace GestorDeRestaurante.BS
         public RepositorioRestaurante(IMemoryCache cache, DA.DbContexto contexto)
         {
             ElCache = cache;
-            ElContexto = contexto;
+            ElContextoBD = contexto;
 
             /*
             if (ElCache.Get("idSeleccionado") == null)
@@ -76,18 +76,16 @@ namespace GestorDeRestaurante.BS
 
 
 
-        public bool AgregarNuevoIngrediente(Ingrediente elIngrediente)
+        public void AgregarNuevoIngrediente(Ingrediente elIngrediente)
         {
 
             bool existe = VerifiqueSiExisteIngrediente(elIngrediente.Nombre);
 
             if (existe == false)
             {
-                ElContexto.Ingredientes.Add(elIngrediente);
-                ElContexto.SaveChanges();
+                ElContextoBD.Ingredientes.Add(elIngrediente);
+                ElContextoBD.SaveChanges();
             }//Fin if
-
-            return existe;
         }//Fin metodo
 
         private bool VerifiqueSiExisteIngrediente(string nombre)
@@ -111,14 +109,14 @@ namespace GestorDeRestaurante.BS
 
         public List<Ingrediente> ObtengaLaListaDeIngredientesGeneral()
         {
-            var resultado = from c in ElContexto.Ingredientes select c;
+            var resultado = from c in ElContextoBD.Ingredientes select c;
             List<Ingrediente> losIngredientes = resultado.ToList();
             return losIngredientes;
         }//Fin metodo
 
         public List<Medida> ObtengaLaListaDeMedidasGeneral()
         {
-            var resultado = from c in ElContexto.Medidas select c;
+            var resultado = from c in ElContextoBD.Medidas select c;
             List<Medida> lasMedidas = resultado.ToList();
             return lasMedidas;
         }//Fin metodo
@@ -133,7 +131,7 @@ namespace GestorDeRestaurante.BS
             List<DetalleDePlatillo> losPlatillosQueTienenElIngrediente = new List<DetalleDePlatillo>();
             DetalleDePlatillo elPlatilloADetallar;
 
-            var resultado = from c in ElContexto.MenuIngredientes select c;
+            var resultado = from c in ElContextoBD.MenuIngredientes select c;
             List<PlatilloIngredientes> todosLosPlatillosDelMenu = resultado.ToList();
 
             foreach (PlatilloIngredientes estePlatillo in todosLosPlatillosDelMenu)
