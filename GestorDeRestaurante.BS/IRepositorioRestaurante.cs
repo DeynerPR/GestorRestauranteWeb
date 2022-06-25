@@ -24,8 +24,7 @@ namespace GestorDeRestaurante.BS
         public void AgregueElIngrediente(Model.Ingrediente ingrediente);
         Model.Ingrediente ObtenerIngredientePorId(int Id);
         void EditarIngrediente(Model.Ingrediente ingrediente);
-        public List<Model.DetalleDePlatillo> ObtengaLosPlatillosQueUsanEsteIngrediente(int idIngrediente);
-        public string ObtengaElNombreDelIngrediente(int idIngredienteElegido, List<Model.Ingrediente> losIngredientes);
+        public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido);       
 
 
         //Platillo (Menu)

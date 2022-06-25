@@ -1,0 +1,68 @@
+﻿ @model GestorDeRestaurante.Model.DetalleDelIngrediente
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h4>Detalles del Ingrediente</h4>
+<br/>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+</div>
+@if (Model.losPlatillosConDetalle.Count > 0)
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.losPlatillosConDetalle[0].NombrePlatillo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.losPlatillosConDetalle[0].NombreMedida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.losPlatillosConDetalle[0].Cantidad)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model.losPlatillosConDetalle)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombrePlatillo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreMedida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+}
+else{
+        <h5>No se ecuentran platillos que contengan este ingrediente</h5>
+}
+
+<br/>
+<div>
+    <a asp-action="Index">Volver a lista de ingredientes</a>
+</div>

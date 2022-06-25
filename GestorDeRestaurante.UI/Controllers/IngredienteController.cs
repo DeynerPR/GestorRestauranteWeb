@@ -31,6 +31,41 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(losPlatillosDetallados);
         }
 
+
+
+        // GET: EstudianteController/Details/5
+        public async Task<IActionResult> Detalles(int Id)
+        {
+            Model.DetalleDelIngrediente elDetalleDelIngrediente = new Model.DetalleDelIngrediente();
+
+            try
+
+            {
+                var httpClient = new HttpClient();
+                var query = new Dictionary<string, string>()
+                {
+
+                    ["id"] = Id.ToString()
+                };
+
+                var uri = QueryHelpers.AddQueryString("https://localhost:7181/api/Ingrediente/ObtengaElDetalleDelIngrediente", query);
+                var response = await httpClient.GetAsync(uri);
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                elDetalleDelIngrediente = JsonConvert.DeserializeObject<GestorDeRestaurante.Model.DetalleDelIngrediente>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+            return View(elDetalleDelIngrediente);
+        }
+
+
+
+
+
         // GET: IngredienteController/Agregar
         public ActionResult Agregar()
         {
@@ -131,6 +166,8 @@ namespace GestorDeRestaurante.UI.Controllers
             }
         }
 
+
+ 
 
 
     }//FIN CLASE

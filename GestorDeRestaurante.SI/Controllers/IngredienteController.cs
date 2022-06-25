@@ -26,6 +26,23 @@ namespace GestorDeRestaurante.SI.Controllers
             return losIngredientes;
         }
 
+
+
+        // GET: api/<IngredienteController>
+        [HttpGet("ObtengaElDetalleDelIngrediente")]
+        public GestorDeRestaurante.Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(string Id)
+        {
+            int id = int.Parse(Id);
+            Model.DetalleDelIngrediente elDetalleDelIngrediente = ElRepositorio.ObtengaElDetalleDelIngrediente(id);
+            return elDetalleDelIngrediente;
+        }//Fin get
+
+
+        
+
+
+
+
         // POST api/<MedidaController>
         [HttpPost("AgregueElIngrediente")]
         public IActionResult AgregueElIngrediente([FromBody] GestorDeRestaurante.Model.Ingrediente elIngrediente)
@@ -39,15 +56,6 @@ namespace GestorDeRestaurante.SI.Controllers
             }
         }
 
-        // GET: api/<IngredienteController>
-        [HttpGet("ObtenerIngredientePorId")]
-        public GestorDeRestaurante.Model.Ingrediente ObtenerIngredientePorId(int id)
-        {
-            Model.Ingrediente elIngrediente;
-            elIngrediente = ElRepositorio.ObtenerIngredientePorId(id);
-
-            return elIngrediente;
-        }
 
         // PUT api/<IngredienteController>
         [HttpPut("EditarIngrediente")]
