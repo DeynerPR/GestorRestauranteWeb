@@ -11,7 +11,6 @@ namespace GestorDeRestaurante.Model
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo requerido")]
         public string Nombre { get; set; }
 
     }

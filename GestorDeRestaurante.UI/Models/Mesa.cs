@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDeRestaurante.Models
+namespace GestorDeRestaurante.UI.Models
 {
     public class Mesa
     {

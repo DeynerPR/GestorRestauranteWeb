@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.BS", "GestorDeRestaurante.BS\GestorDeRestaurante.BS.csproj", "{CAF5E8B7-C822-4B21-A085-346BD2706A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDeRestaurante.BS", "GestorDeRestaurante.BS\GestorDeRestaurante.BS.csproj", "{CAF5E8B7-C822-4B21-A085-346BD2706A3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.DA", "GestorDeRestaurante.DA\GestorDeRestaurante.DA.csproj", "{24C3E06F-6B88-49F5-B891-19AB1A6E7E4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDeRestaurante.DA", "GestorDeRestaurante.DA\GestorDeRestaurante.DA.csproj", "{24C3E06F-6B88-49F5-B891-19AB1A6E7E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.Model", "GestorDeRestaurante.Model\GestorDeRestaurante.Model.csproj", "{C9783397-7B57-475A-99A9-353649882F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDeRestaurante.Model", "GestorDeRestaurante.Model\GestorDeRestaurante.Model.csproj", "{C9783397-7B57-475A-99A9-353649882F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.SI", "GestorDeRestaurante.SI\GestorDeRestaurante.SI.csproj", "{DF229D97-0589-4345-B5D0-FAB95DB17899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDeRestaurante.SI", "GestorDeRestaurante.SI\GestorDeRestaurante.SI.csproj", "{DF229D97-0589-4345-B5D0-FAB95DB17899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.UI", "GestorDeRestaurante.UI\GestorDeRestaurante.UI.csproj", "{2610026E-0128-4B82-8B0C-9A03E37C2F26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeRestaurante.UI", "GestorDeRestaurante.UI\GestorDeRestaurante.UI.csproj", "{DF9A27CA-38F0-48CE-AF4E-82BDA71F9EA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{DF229D97-0589-4345-B5D0-FAB95DB17899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF229D97-0589-4345-B5D0-FAB95DB17899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF229D97-0589-4345-B5D0-FAB95DB17899}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2610026E-0128-4B82-8B0C-9A03E37C2F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2610026E-0128-4B82-8B0C-9A03E37C2F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2610026E-0128-4B82-8B0C-9A03E37C2F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2610026E-0128-4B82-8B0C-9A03E37C2F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9A27CA-38F0-48CE-AF4E-82BDA71F9EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9A27CA-38F0-48CE-AF4E-82BDA71F9EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9A27CA-38F0-48CE-AF4E-82BDA71F9EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9A27CA-38F0-48CE-AF4E-82BDA71F9EA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

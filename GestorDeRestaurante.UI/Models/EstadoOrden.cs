@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDeRestaurante.Model
-{
+namespace GestorDeRestaurante.UI.Models
+{ 
     public enum EstadoOrden
     {
 

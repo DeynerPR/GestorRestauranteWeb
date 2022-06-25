@@ -40,10 +40,15 @@ namespace GestorDeRestaurante.UI.Controllers
         // POST: IngredienteController/Agregar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Agregar(Model.Ingrediente elIngrediente)
+        public async Task<IActionResult> Agregar(Models.Ingrediente ingrediente)
         {
             try
             {
+                GestorDeRestaurante.Model.Ingrediente elIngrediente = new Model.Ingrediente();
+
+                elIngrediente.Id = ingrediente.Id;
+                elIngrediente.Nombre = ingrediente.Nombre;
+
                 var httpClient = new HttpClient();
 
                 string json = JsonConvert.SerializeObject(elIngrediente);
@@ -72,7 +77,6 @@ namespace GestorDeRestaurante.UI.Controllers
             Model.Ingrediente elIngrediente;
 
             try
-
             {
                 var httpClient = new HttpClient();
 

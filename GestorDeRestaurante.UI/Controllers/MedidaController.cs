@@ -41,10 +41,15 @@ namespace GestorDeRestaurante.UI.Controllers
         // POST: MedidaController/Agregar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Agregar(Model.Medida laMedida)
+        public async Task<IActionResult> Agregar(Models.Medida medida)
         {
             try
             {
+                GestorDeRestaurante.Model.Medida laMedida = new Model.Medida();
+
+                laMedida.Id = medida.Id;
+                laMedida.Nombre = medida.Nombre;
+
 
                 var httpClient = new HttpClient();
 
@@ -68,7 +73,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
 
         // GET: MedidaController/Editar
-        public async Task<IActionResult> Editar(int Id)
+        public async Task <IActionResult> Editar(int Id)
         {
 
             Model.Medida laMedida;
@@ -87,7 +92,7 @@ namespace GestorDeRestaurante.UI.Controllers
                 var response = await httpClient.GetAsync(uri);
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
-                laMedida = JsonConvert.DeserializeObject<GestorDeRestaurante.Model.Medida>(apiResponse);
+                laMedida = JsonConvert.DeserializeObject<Model.Medida>(apiResponse);
 
             }
             catch (Exception ex)
@@ -146,7 +151,7 @@ namespace GestorDeRestaurante.UI.Controllers
                 var uri = QueryHelpers.AddQueryString("https://localhost:7181/api/Medida/ObtenerMedidaPorId", query);
                 var response = await httpClient.GetAsync(uri);
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                laMedida = JsonConvert.DeserializeObject<GestorDeRestaurante.Model.Medida>(apiResponse);
+                laMedida = JsonConvert.DeserializeObject<Model.Medida>(apiResponse);
             }
             catch (Exception ex)
             {
