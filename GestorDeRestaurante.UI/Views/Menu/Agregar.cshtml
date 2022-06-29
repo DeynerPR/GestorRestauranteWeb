@@ -1,0 +1,66 @@
+﻿@model GestorDeRestaurante.UI.Models.Platillo
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+
+<h4>Nuevo Platillo</h4>
+<br/>
+ 
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar" enctype="multipart/form-data" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <br/>
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                 <br />
+                <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<Categoria>()">
+                </select>
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            
+            <br/>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            
+            <dl>
+                <dt>
+                    <label asp-for="Imagen"></label>
+                </dt>
+                <dd>
+                    <input asp-for="Imagen" type="file">
+                    <span asp-validation-for="Imagen"></span>
+                </dd>
+            </dl>
+
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br/>
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

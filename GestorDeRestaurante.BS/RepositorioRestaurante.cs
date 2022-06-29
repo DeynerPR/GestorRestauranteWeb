@@ -11,24 +11,39 @@ namespace GestorDeRestaurante.BS
 
         int idSeleccionado;
 
-        //Inicializaciones
-        //::::::::::::::::::::::::::::::::::::::
+
+        //Inicializaciones::::::::::::::::::::::::::::::::::::::::::.
         public RepositorioRestaurante(IMemoryCache cache, DA.DbContexto contexto)
         {
             ElCache = cache;
             ElContextoBD = contexto;
 
-            /*
-            if (ElCache.Get("idSeleccionado") == null)
-            {
-                ElCache.Set("idSeleccionado", idSeleccionado);
-            }
-           */
+            CargarMedidasPorDefecto();
 
         }//Fin constructor.
 
 
-        //MEDIDAS
+
+
+
+        //MEDIDAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+        public string ObtengaElNombreDeLaMedida(int idMedidaEnPlatillo, List<Medida> lasMedidas)
+        {
+            string elNombre = "---";
+
+            foreach (Medida estaMedida in lasMedidas)
+            {
+                if (estaMedida.Id == idMedidaEnPlatillo)
+                {
+                    elNombre = estaMedida.Nombre;
+                    break;
+                }
+            }
+
+            return elNombre;
+        }//Fin metodo
+        
         public List<Medida> ObtengaLaListaDeMedidas()
         {
             var resultado = from c in ElContextoBD.Medidas select c;
@@ -90,18 +105,31 @@ namespace GestorDeRestaurante.BS
 
         }
 
-        public Medida ObtengaLaMedida(int Id)
-        {
-            throw new NotImplementedException();
-        }
+        public void CargarMedidasPorDefecto() {
+
+            List<Medida> lasMedidas = ObtengaLaListaDeMedidas();
+            List<string> losNombres = new List<string>() {"Pizca", "Cucharada", "Taza", "Litro", "Mililitros"};
+
+            Medida laNuevaMedida;
+            if (lasMedidas.Count == 0)
+            {
+                foreach (var esteNombre in losNombres)
+                {
+                    laNuevaMedida = new Medida();
+                    laNuevaMedida.Nombre = esteNombre;
+                    ElContextoBD.Medidas.Add(laNuevaMedida);
+                    ElContextoBD.SaveChanges();
+                }
+            }//Fin if
+        }//Fin metodo
 
 
 
 
 
 
-       
 
+        //Ingredientes::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         public bool ExisteElIngrediente(string nombre)
         {
@@ -132,6 +160,15 @@ namespace GestorDeRestaurante.BS
             }//Fin if
         }//Fin metodo
 
+        public List<Ingrediente> ObtengaLaListaDeIngredientes()
+        {
+            var resultado = from c in ElContextoBD.Ingredientes select c;
+            List<Ingrediente> losIngredientes = resultado.ToList();
+
+            return losIngredientes;
+
+        }//Fin metodo
+
         public Ingrediente ObtenerIngredientePorId(int Id)
         {
             Model.Ingrediente elIngrediente;
@@ -140,7 +177,7 @@ namespace GestorDeRestaurante.BS
 
             return elIngrediente;
 
-        }
+        }//Fin metodo
 
         public void EditarIngrediente(Ingrediente ingrediente)
         {
@@ -188,7 +225,6 @@ namespace GestorDeRestaurante.BS
             return elDetalleDelIngrediente;
         }//Fin metodo
 
-
         public string ObtengaElNombreDelIngrediente(int idIngredienteElegido, List<Ingrediente> losIngredientes)
         {
             string elNombre = "---";
@@ -204,8 +240,16 @@ namespace GestorDeRestaurante.BS
             return elNombre;
         }//FIn metodo
 
-        public string ObtengaElNombreDePlatillo(int idDelMenu, List<Platillo> losPlatillos) {
-            
+
+
+
+
+
+        //Menu::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+        public string ObtengaElNombreDePlatillo(int idDelMenu, List<Platillo> losPlatillos)
+        {
+
             string elNombre = "---";
 
             foreach (Platillo estePlatillo in losPlatillos)
@@ -219,32 +263,6 @@ namespace GestorDeRestaurante.BS
             return elNombre;
         }//Fin metodo
 
-        public string ObtengaElNombreDeLaMedida(int idMedidaEnPlatillo, List<Medida> lasMedidas)
-        {
-            string elNombre = "---";
-
-            foreach (Medida estaMedida in lasMedidas)
-            {
-                if (estaMedida.Id == idMedidaEnPlatillo)
-                {
-                    elNombre = estaMedida.Nombre;
-                    break;
-                }
-            }
-
-            return elNombre;
-        }//Fin metodo
-
-        //INGREDIENTES
-        public List<Ingrediente> ObtengaLaListaDeIngredientes()
-        {
-            var resultado = from c in ElContextoBD.Ingredientes select c;
-            List<Ingrediente> losIngredientes = resultado.ToList();
-
-            return losIngredientes;
-
-        }//Fin metodo
-
         public List<Platillo> ObtengaLosPlatillosDelMenu()
         {
             var resultado = from c in ElContextoBD.Menu select c;
@@ -252,6 +270,37 @@ namespace GestorDeRestaurante.BS
 
             return losPlatillos;
         }//Fin metodo
+
+        public bool ExisteElPlatillo(string nombre)
+        {
+            bool existe; existe = false;
+            List<Platillo> losPatillos = ObtengaLosPlatillosDelMenu();
+
+            foreach (Platillo estePlatillo in losPatillos)
+            {
+                if (estePlatillo.Nombre.Equals(nombre))
+                {
+                    existe = true;
+                    break;
+                }//Fin if
+            }//Fin foreach
+
+            return existe;
+        }//Fin metodo
+
+        public void AgregueElPlatillo(Platillo elPlatillo)
+        {
+
+            bool existe = ExisteElPlatillo(elPlatillo.Nombre);
+
+            if (existe == false)
+            {
+                ElContextoBD.Menu.Add(elPlatillo);
+                ElContextoBD.SaveChanges();
+            }//Fin if
+        }//Fin metodo
+
+
 
 
     }// FIN CLASE

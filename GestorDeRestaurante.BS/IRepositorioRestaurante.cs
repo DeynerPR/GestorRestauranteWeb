@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorDeRestaurante.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,6 @@ namespace GestorDeRestaurante.BS
         void AgregueLaMedida(Model.Medida medida);
         Model.Medida ObtenerMedidaPorId(int Id);
         void EditarMedida(Model.Medida medida);
-        Model.Medida ObtengaLaMedida(int Id);
         public string ObtengaElNombreDeLaMedida(int idDMedidaEnPlatillo, List<Model.Medida> lasMedidas);
 
 
@@ -24,10 +24,11 @@ namespace GestorDeRestaurante.BS
         public void AgregueElIngrediente(Model.Ingrediente ingrediente);
         Model.Ingrediente ObtenerIngredientePorId(int Id);
         void EditarIngrediente(Model.Ingrediente ingrediente);
-        public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido);       
+        public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido);
 
 
         //Platillo (Menu)
+        void AgregueElPlatillo(Platillo elPlatillo);
 
 
 

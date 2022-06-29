@@ -16,6 +16,7 @@ namespace GestorDeRestaurante.Model
         public Categoria Categoria { get; set; }
 
         public float Precio { get; set; }
+
         public byte[] Imagen { get; set; }
 
     }

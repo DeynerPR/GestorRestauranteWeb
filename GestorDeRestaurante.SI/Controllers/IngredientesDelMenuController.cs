@@ -7,7 +7,7 @@ namespace GestorDeRestaurante.SI.Controllers
     public class IngredientesDelMenuController : ControllerBase
     {
 
-
+        
 
 
 
