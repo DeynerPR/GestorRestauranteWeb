@@ -14,7 +14,7 @@ namespace GestorDeRestaurante.SI.Controllers
         public IngredienteController(BS.IRepositorioRestaurante repositorio)
         {
             ElRepositorio = repositorio;
-        }
+        }//Fin costructor
 
 
 
@@ -23,8 +23,10 @@ namespace GestorDeRestaurante.SI.Controllers
         public IEnumerable<GestorDeRestaurante.Model.Ingrediente> ObtengaLosIngredientes()
         {
             List<Model.Ingrediente> losIngredientes = ElRepositorio.ObtengaLaListaDeIngredientes();
+            
             return losIngredientes;
-        }
+
+        }//Fin
 
 
 
@@ -34,12 +36,9 @@ namespace GestorDeRestaurante.SI.Controllers
         {
             int id = int.Parse(Id);
             Model.DetalleDelIngrediente elDetalleDelIngrediente = ElRepositorio.ObtengaElDetalleDelIngrediente(id);
+            
             return elDetalleDelIngrediente;
-        }//Fin get
-
-
-        
-
+        }//Fin 
 
 
 
@@ -54,14 +53,14 @@ namespace GestorDeRestaurante.SI.Controllers
             else {
                 return BadRequest(ModelState);
             }
-        }
+        }//Fin 
+
 
 
         // PUT api/<IngredienteController>
         [HttpPut("EditarIngrediente")]
         public IActionResult EditarIngrediente([FromBody] GestorDeRestaurante.Model.Ingrediente ingrediente)
         {
-
             if (ModelState.IsValid)
             {
                 ElRepositorio.EditarIngrediente(ingrediente);
@@ -72,6 +71,20 @@ namespace GestorDeRestaurante.SI.Controllers
             {
                 return BadRequest(ModelState);
             }
-        }
-    }
+        }//Fin 
+
+
+        // GET: api/<IngredienteController>
+        [HttpGet("ObtenerIngredientePorId")]
+        public GestorDeRestaurante.Model.Ingrediente ObtenerIngredientePorId(int id)
+        {
+            Model.Ingrediente elIngrediente;
+            elIngrediente = ElRepositorio.ObtenerIngredientePorId(id);
+
+            return elIngrediente;
+        }//Fin 
+
+
+
+    }//Fin class
 }

@@ -30,13 +30,15 @@ namespace GestorDeRestaurante.UI.Controllers
 
             return View(laListaDeMedidas);
 
-        }
+        }//Fin 
+
 
         // GET: MedidaController/Agregar
         public ActionResult Agregar()
         {
             return View();
-        }
+        }//Fin 
+
 
         // POST: MedidaController/Agregar
         [HttpPost]
@@ -45,7 +47,7 @@ namespace GestorDeRestaurante.UI.Controllers
         {
             try
             {
-                GestorDeRestaurante.Model.Medida laMedida = new Model.Medida();
+                Model.Medida laMedida = new Model.Medida();
 
                 laMedida.Id = medida.Id;
                 laMedida.Nombre = medida.Nombre;
@@ -69,7 +71,7 @@ namespace GestorDeRestaurante.UI.Controllers
             {
                 return View();
             }
-        }
+        }//Fin 
 
 
         // GET: MedidaController/Editar
@@ -88,7 +90,7 @@ namespace GestorDeRestaurante.UI.Controllers
                     ["id"] = Id.ToString()
                 };
 
-                var uri = QueryHelpers.AddQueryString("https://localhost:7181/api/Estudiantes/ObtenerMedidaPorId", query);
+                var uri = QueryHelpers.AddQueryString("https://localhost:7181/api/Medida/ObtenerMedidaPorId", query);
                 var response = await httpClient.GetAsync(uri);
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -102,7 +104,8 @@ namespace GestorDeRestaurante.UI.Controllers
             }
 
             return View(laMedida);
-        }
+        }//Fin 
+
 
         // POST: MedidaController/Editar
         [HttpPost]
@@ -132,7 +135,8 @@ namespace GestorDeRestaurante.UI.Controllers
                 return View();
 
             }
-        }
+        }//Fin 
+
 
         // GET: MedidaController/Detalle
         public async Task<IActionResult> Detalle(int Id)
@@ -160,10 +164,10 @@ namespace GestorDeRestaurante.UI.Controllers
             }
 
             return View(laMedida);
-        }
+        }//Fin 
 
 
 
 
-    }
+    }//Fin class
 }

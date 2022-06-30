@@ -1,0 +1,62 @@
+﻿@model IEnumerable<GestorDeRestaurante.Model.Platillo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Menu</h1>
+
+<p>
+    <a asp-action="Agregar">Agregar platillo</a>
+</p>
+
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+                @Html.ActionLink("Detalles", "Detalles", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<br/>
+<form method="get" asp-action="MenuCompleto">
+    <div class="form-group">
+        <input type="submit" value="Ver Menu Completo" class="btn btn-success"/>
+    </div>
+</form>

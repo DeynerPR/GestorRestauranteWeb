@@ -12,7 +12,9 @@ namespace GestorDeRestaurante.SI.Controllers
         public MedidaController(BS.IRepositorioRestaurante repositorio)
         {
             ElRepositorio = repositorio;
-        }
+        }//Fin constructor
+
+
 
         // GET: api/<MedidaController>
         [HttpGet("ObtengaLasMedidas")]
@@ -21,14 +23,14 @@ namespace GestorDeRestaurante.SI.Controllers
             List<Model.Medida> lasMedidas = ElRepositorio.ObtengaLaListaDeMedidas();
             
             return lasMedidas;
-        
-        }
+        }//Fin 
+
+
 
         // POST api/<MedidaController>
         [HttpPost("AgregueLaMedida")]
         public IActionResult AgregueLaMedida([FromBody] GestorDeRestaurante.Model.Medida medida)
         {
-
             if (ModelState.IsValid)
             {
                 ElRepositorio.AgregueLaMedida(medida);
@@ -39,8 +41,9 @@ namespace GestorDeRestaurante.SI.Controllers
             {
                 return BadRequest(ModelState);
             }
+        }//Fin 
 
-        }
+
 
         // GET: api/<MedidaController>
         [HttpGet("ObtenerMedidaPorId")]
@@ -50,24 +53,27 @@ namespace GestorDeRestaurante.SI.Controllers
             laMedida = ElRepositorio.ObtenerMedidaPorId(id);
 
             return laMedida;
-        }
+        }//Fin 
+
+
 
         // PUT api/<MedidaController>
         [HttpPut("EditarMedida")]
-        public IActionResult EditarMedida([FromBody] GestorDeRestaurante.Model.Medida medida)
+        public IActionResult EditarMedida([FromBody] GestorDeRestaurante.Model.Platillo elPlatillo)
         {
 
             if (ModelState.IsValid)
             {
-                ElRepositorio.EditarMedida(medida);
+                ElRepositorio.EditarPlatillo(elPlatillo);
 
-                return Ok(medida);
+                return Ok(elPlatillo);
             }
             else
             {
                 return BadRequest(ModelState);
             }
-        }
+        }//Fin 
+
 
 
 

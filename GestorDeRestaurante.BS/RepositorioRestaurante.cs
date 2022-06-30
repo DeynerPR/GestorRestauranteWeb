@@ -6,29 +6,65 @@ namespace GestorDeRestaurante.BS
     public class RepositorioRestaurante : IRepositorioRestaurante
     {
 
-        private readonly IMemoryCache ElCache;
         private DA.DbContexto ElContextoBD;
 
-        int idSeleccionado;
-
-
         //Inicializaciones::::::::::::::::::::::::::::::::::::::::::.
-        public RepositorioRestaurante(IMemoryCache cache, DA.DbContexto contexto)
+        public RepositorioRestaurante(DA.DbContexto contexto)
         {
-            ElCache = cache;
             ElContextoBD = contexto;
-
             CargarMedidasPorDefecto();
-
         }//Fin constructor.
 
 
 
 
 
-        //MEDIDAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        //MEDIDAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..
 
-        public string ObtengaElNombreDeLaMedida(int idMedidaEnPlatillo, List<Medida> lasMedidas)
+        //      -------Publicos------
+        public List<Medida> ObtengaLaListaDeMedidas()
+        {
+            var resultado = from c in ElContextoBD.Medidas select c;
+            List<Medida> lasMedidas = resultado.ToList();
+            return lasMedidas;
+        }//Fin metodo
+        public void AgregueLaMedida(Medida laMedida)
+        {
+
+            bool existe = ExisteLaMedida(laMedida.Nombre);
+
+            if (existe == false)
+            {
+                ElContextoBD.Medidas.Add(laMedida);
+                ElContextoBD.SaveChanges();
+
+            }
+        }//Fin metodo
+        public void EditarMedida(Medida medida)
+        {
+            Model.Medida laMedidaAModificar;
+
+            laMedidaAModificar = ObtenerMedidaPorId(medida.Id);
+
+            laMedidaAModificar.Nombre = medida.Nombre;
+
+            ElContextoBD.Medidas.Update(laMedidaAModificar);
+            ElContextoBD.SaveChanges();
+
+        }//Fin metodo
+        public Medida ObtenerMedidaPorId(int Id)
+        {
+            Model.Medida laMedida;
+
+            laMedida = ElContextoBD.Medidas.Find(Id);
+
+            return laMedida;
+
+        }//Fin metodo
+
+
+        //      -------Privados------
+        private string ObtengaElNombreDeLaMedida(int idMedidaEnPlatillo, List<Medida> lasMedidas)
         {
             string elNombre = "---";
 
@@ -44,16 +80,7 @@ namespace GestorDeRestaurante.BS
             return elNombre;
         }//Fin metodo
         
-        public List<Medida> ObtengaLaListaDeMedidas()
-        {
-            var resultado = from c in ElContextoBD.Medidas select c;
-            List<Medida> lasMedidas = resultado.ToList();
-
-            return lasMedidas;
-
-        }
-
-        public bool ExisteLaMedida(string nombre)
+        private bool ExisteLaMedida(string nombre)
         {
             bool existe; existe = false;
             List<Medida> lasMedidas = ObtengaLaListaDeMedidas();
@@ -67,48 +94,13 @@ namespace GestorDeRestaurante.BS
                 }
             }
             return existe;
-        }
-
-        public void AgregueLaMedida(Medida laMedida)
+        }//Fin metodo
+        
+        public void CargarMedidasPorDefecto()
         {
-
-            bool existe = ExisteLaMedida(laMedida.Nombre);
-
-            if (existe == false)
-            {
-                ElContextoBD.Medidas.Add(laMedida);
-                ElContextoBD.SaveChanges();
-
-            }
-        }
-
-        public Medida ObtenerMedidaPorId(int Id)
-        {
-            Model.Medida laMedida;
-
-            laMedida = ElContextoBD.Medidas.Find(Id);
-
-            return laMedida;
-
-        }
-
-        public void EditarMedida(Medida medida)
-        {
-            Model.Medida laMedidaAModificar;
-
-            laMedidaAModificar = ObtenerMedidaPorId(medida.Id);
-
-            laMedidaAModificar.Nombre = medida.Nombre;
-
-            ElContextoBD.Medidas.Update(laMedidaAModificar);
-            ElContextoBD.SaveChanges();
-
-        }
-
-        public void CargarMedidasPorDefecto() {
 
             List<Medida> lasMedidas = ObtengaLaListaDeMedidas();
-            List<string> losNombres = new List<string>() {"Pizca", "Cucharada", "Taza", "Litro", "Mililitros"};
+            List<string> losNombres = new List<string>() { "Pizca", "Cucharada", "Taza", "Litro", "Mililitros" };
 
             Medida laNuevaMedida;
             if (lasMedidas.Count == 0)
@@ -129,23 +121,20 @@ namespace GestorDeRestaurante.BS
 
 
 
-        //Ingredientes::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-        public bool ExisteElIngrediente(string nombre)
+
+
+
+        //Ingredientes::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+        //      -------Publicos------
+        public List<Ingrediente> ObtengaLaListaDeIngredientes()
         {
-            bool existe; existe = false;
-            List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
+            var resultado = from c in ElContextoBD.Ingredientes select c;
+            List<Ingrediente> losIngredientes = resultado.ToList();
 
-            foreach (Ingrediente esteIngrediente in losIngredientes)
-            {
-                if (esteIngrediente.Nombre.Equals(nombre))
-                {
-                    existe = true;
-                    break;
-                }//Fin if
-            }//Fin foreach
+            return losIngredientes;
 
-            return existe;
         }//Fin metodo
 
         public void AgregueElIngrediente(Ingrediente elIngrediente)
@@ -158,25 +147,6 @@ namespace GestorDeRestaurante.BS
                 ElContextoBD.Ingredientes.Add(elIngrediente);
                 ElContextoBD.SaveChanges();
             }//Fin if
-        }//Fin metodo
-
-        public List<Ingrediente> ObtengaLaListaDeIngredientes()
-        {
-            var resultado = from c in ElContextoBD.Ingredientes select c;
-            List<Ingrediente> losIngredientes = resultado.ToList();
-
-            return losIngredientes;
-
-        }//Fin metodo
-
-        public Ingrediente ObtenerIngredientePorId(int Id)
-        {
-            Model.Ingrediente elIngrediente;
-
-            elIngrediente = ElContextoBD.Ingredientes.Find(Id);
-
-            return elIngrediente;
-
         }//Fin metodo
 
         public void EditarIngrediente(Ingrediente ingrediente)
@@ -206,10 +176,10 @@ namespace GestorDeRestaurante.BS
 
 
             var resultado = from c in ElContextoBD.MenuIngredientes select c;
-            List<PlatilloIngredientes> todosLosPlatillosDelMenu = resultado.ToList();
+            List<MenuIngredientes> todosLosPlatillosDelMenu = resultado.ToList();
             DetalleDePlatillo elPlatilloADetallar;
 
-            foreach (PlatilloIngredientes estePlatillo in todosLosPlatillosDelMenu)
+            foreach (MenuIngredientes estePlatillo in todosLosPlatillosDelMenu)
             {
                 if (estePlatillo.Id_Ingredientes == idIngredienteElegido)
                 {
@@ -225,7 +195,21 @@ namespace GestorDeRestaurante.BS
             return elDetalleDelIngrediente;
         }//Fin metodo
 
-        public string ObtengaElNombreDelIngrediente(int idIngredienteElegido, List<Ingrediente> losIngredientes)
+        public Ingrediente ObtenerIngredientePorId(int Id)
+        {
+            Model.Ingrediente elIngrediente;
+
+            elIngrediente = ElContextoBD.Ingredientes.Find(Id);
+
+            return elIngrediente;
+
+        }//Fin metodo
+
+
+
+        //      -------Privados------
+
+        private string ObtengaElNombreDelIngrediente(int idIngredienteElegido, List<Ingrediente> losIngredientes)
         {
             string elNombre = "---";
 
@@ -240,6 +224,29 @@ namespace GestorDeRestaurante.BS
             return elNombre;
         }//FIn metodo
 
+        private bool ExisteElIngrediente(string nombre)
+        {
+            bool existe; existe = false;
+            List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
+
+            foreach (Ingrediente esteIngrediente in losIngredientes)
+            {
+                if (esteIngrediente.Nombre.Equals(nombre))
+                {
+                    existe = true;
+                    break;
+                }//Fin if
+            }//Fin foreach
+
+            return existe;
+        }//Fin metodo
+
+
+
+
+
+
+
 
 
 
@@ -247,7 +254,107 @@ namespace GestorDeRestaurante.BS
 
         //Menu::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-        public string ObtengaElNombreDePlatillo(int idDelMenu, List<Platillo> losPlatillos)
+
+        //      -------Publicos------
+        public List<Platillo> ObtengaLosPlatillosDelMenu()
+        {
+            var resultado = from c in ElContextoBD.Menu select c;
+            List<Platillo> losPlatillos = resultado.ToList();
+
+            return losPlatillos;
+        }//Fin metodo
+
+        public void AgregueElPlatillo(Platillo elPlatillo)
+        {
+            bool existe = ExisteElPlatillo(elPlatillo.Nombre);
+
+            if (existe == false)
+            {
+                ElContextoBD.Menu.Add(elPlatillo);
+                ElContextoBD.SaveChanges();
+            }//Fin if
+        }//Fin metodo
+
+        public void EditarPlatillo(Platillo elPlatillo) {
+
+            Model.Platillo elPlatilloAModificar = new Platillo();
+
+            elPlatilloAModificar = ObtenerPlatilloPorId(elPlatillo.Id);
+
+            elPlatilloAModificar.Nombre = elPlatillo.Nombre;
+            elPlatilloAModificar.Categoria = elPlatillo.Categoria;
+            elPlatilloAModificar.Precio = elPlatillo.Precio;
+            elPlatilloAModificar.Imagen = elPlatillo.Imagen;
+
+            ElContextoBD.Menu.Update(elPlatilloAModificar);
+            ElContextoBD.SaveChanges();
+        }//Fin metodo
+
+        public Platillo ObtengaElDetalleDelPlatillo(int id)
+        {
+            Platillo elPlatillo = ElContextoBD.Menu.Find(id);
+            return elPlatillo;
+        }//Fin metodo
+
+        public Platillo ObtenerPlatilloPorId(int id)
+        {
+            Model.Platillo Platillo;
+
+            Platillo = ElContextoBD.Menu.Find(id);
+
+            return Platillo;
+        }//Fin metodo
+
+        public MenuCompleto ObtenerMenuCompleto() {
+
+            MenuCompleto elMenuCompleto = new MenuCompleto();
+            List<Platillo> losPlatillos = ObtengaLosPlatillosDelMenu();
+            int CategoriaDeMenu;
+
+            foreach (var estePlatillo in losPlatillos)
+            {
+                CategoriaDeMenu = (int)estePlatillo.Categoria;
+                
+                switch (CategoriaDeMenu)
+                {
+                    case 1:
+                        elMenuCompleto.Entradas.Add(estePlatillo);
+                        break;
+
+                    case 2:
+                        elMenuCompleto.PequenasBotanas.Add(estePlatillo);
+                        break;
+
+                    case 3:
+                        elMenuCompleto.Aperitivos.Add(estePlatillo);
+                        break;
+
+                    case 4:
+                        elMenuCompleto.SopasYEnsaladas.Add(estePlatillo);
+                        break;
+
+                    case 5:
+                        elMenuCompleto.Principales.Add(estePlatillo);
+                        break;
+                    
+                    case 6:
+                        elMenuCompleto.Postres.Add(estePlatillo);
+                        break;
+                    
+                    case 7:
+                        elMenuCompleto.Bebidas.Add(estePlatillo);
+                        break;
+                   
+                }//Fin switch
+            }//Fin foreach
+
+            return elMenuCompleto;
+        }//Fin metodo
+
+
+
+        //      -------Privados------
+        private string ObtengaElNombreDePlatillo(int idDelMenu, List<Platillo> losPlatillos)
         {
 
             string elNombre = "---";
@@ -263,15 +370,7 @@ namespace GestorDeRestaurante.BS
             return elNombre;
         }//Fin metodo
 
-        public List<Platillo> ObtengaLosPlatillosDelMenu()
-        {
-            var resultado = from c in ElContextoBD.Menu select c;
-            List<Platillo> losPlatillos = resultado.ToList();
-
-            return losPlatillos;
-        }//Fin metodo
-
-        public bool ExisteElPlatillo(string nombre)
+        private bool ExisteElPlatillo(string nombre)
         {
             bool existe; existe = false;
             List<Platillo> losPatillos = ObtengaLosPlatillosDelMenu();
@@ -288,17 +387,14 @@ namespace GestorDeRestaurante.BS
             return existe;
         }//Fin metodo
 
-        public void AgregueElPlatillo(Platillo elPlatillo)
-        {
 
-            bool existe = ExisteElPlatillo(elPlatillo.Nombre);
 
-            if (existe == false)
-            {
-                ElContextoBD.Menu.Add(elPlatillo);
-                ElContextoBD.SaveChanges();
-            }//Fin if
-        }//Fin metodo
+
+
+        //Lista
+        //Agregue
+        //Editar
+        //Detalle
 
 
 

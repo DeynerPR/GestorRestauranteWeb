@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestorDeRestaurante.Model
 {
-    public class PlatilloIngredientes
+    public class MenuIngredientes
     {
         public int Id { get; set; }
         public int Id_Menu { get; set; }

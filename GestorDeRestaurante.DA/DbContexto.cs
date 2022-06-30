@@ -9,17 +9,17 @@ namespace GestorDeRestaurante.DA
 {
     public class DbContexto : DbContext
     {
-        public DbContexto(DbContextOptions<DbContexto> opciones) : base(opciones)
-        {
-
-
-        }
+        public DbContexto(DbContextOptions<DbContexto> opciones) : base(opciones) { }
+        
+        
 
         public DbSet<GestorDeRestaurante.Model.Ingrediente> Ingredientes { get; set; }
         public DbSet<GestorDeRestaurante.Model.Medida> Medidas { get; set; }
-        public DbSet<GestorDeRestaurante.Model.PlatilloIngredientes> MenuIngredientes { get; set; }
-
         public DbSet<GestorDeRestaurante.Model.Platillo> Menu { get; set; }
+        public DbSet<GestorDeRestaurante.Model.MenuIngredientes> MenuIngredientes { get; set; }
+
+
+
 
     }
 }

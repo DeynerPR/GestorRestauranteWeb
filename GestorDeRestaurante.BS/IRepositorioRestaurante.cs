@@ -9,38 +9,44 @@ namespace GestorDeRestaurante.BS
 {
     public interface IRepositorioRestaurante
     {
-        //Medida (Medidas)
-        public List<Model.Medida> ObtengaLaListaDeMedidas();
-        public bool ExisteLaMedida(string nombre);
-        void AgregueLaMedida(Model.Medida medida);
-        Model.Medida ObtenerMedidaPorId(int Id);
-        void EditarMedida(Model.Medida medida);
-        public string ObtengaElNombreDeLaMedida(int idDMedidaEnPlatillo, List<Model.Medida> lasMedidas);
 
+        //Medidas
+        public List<Model.Medida> ObtengaLaListaDeMedidas();  //Lista
+        public void AgregueLaMedida(Model.Medida medida);     //Agregue
+        public void EditarMedida(Model.Medida medida);        //Editar
+        public Model.Medida ObtenerMedidaPorId(int Id);       //Detalle
 
-        //Ingrediente (Ingredientes)
-        public List<Model.Ingrediente> ObtengaLaListaDeIngredientes();
-        public bool ExisteElIngrediente(string nombre);
-        public void AgregueElIngrediente(Model.Ingrediente ingrediente);
-        Model.Ingrediente ObtenerIngredientePorId(int Id);
-        void EditarIngrediente(Model.Ingrediente ingrediente);
-        public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido);
+        
 
-
-        //Platillo (Menu)
-        void AgregueElPlatillo(Platillo elPlatillo);
+        //Ingredientes
+        public List<Model.Ingrediente> ObtengaLaListaDeIngredientes();      //Lista
+        public void AgregueElIngrediente(Model.Ingrediente ingrediente);    //Agregue
+        public void EditarIngrediente(Model.Ingrediente ingrediente);       //Editar
+        public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido); //Detalle
+        public Model.Ingrediente ObtenerIngredientePorId(int Id);           
 
 
 
-        //PlatilloIngredientes (MenuIngredientes)
+        //Menu
+        public List<Platillo> ObtengaLosPlatillosDelMenu();             //Lista
+        public void AgregueElPlatillo(Platillo elPlatillo);             //Agregue
+        public void EditarPlatillo(Platillo elPlatillo);                //Editar
+        public Model.Platillo ObtengaElDetalleDelPlatillo(int id);      //Detalle
+        public Model.Platillo ObtenerPlatilloPorId(int Id);
+        public Model.MenuCompleto ObtenerMenuCompleto();
+        
+
+
+         //MenuIngredientes
 
 
 
-        //Mesa (Mesas)
+
+            //Mesa (Mesas)
 
 
 
-        //Orden (MesaOrden)
+            //Orden (MesaOrden)
 
-    }
+        }
 }

@@ -15,7 +15,7 @@ namespace GestorDeRestaurante.Model
         [Display(Name = "Categoría")]
         public Categoria Categoria { get; set; }
 
-        public float Precio { get; set; }
+        public double Precio { get; set; }
 
         public byte[] Imagen { get; set; }
 

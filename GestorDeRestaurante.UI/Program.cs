@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Ingrediente}/{action=Index}/{id?}");
+    pattern: "{controller=Menu}/{action=Index}/{id?}");
 
 app.Run();

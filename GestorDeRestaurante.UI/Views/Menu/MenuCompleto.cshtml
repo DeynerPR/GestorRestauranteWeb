@@ -1,0 +1,268 @@
+﻿@model GestorDeRestaurante.Model.MenuCompleto
+
+@{
+    ViewData["Title"] = "MenuCompleto";
+}
+
+<div>
+    <div class="element">
+       
+       <h5 class="etiquetaEntrada" >Entradas</h5>
+       @if(Model.Entradas.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Entradas[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Entradas[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Entradas[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entradas) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregadas </h6> <br/><br/><br/>}
+
+       <h5 class="etiquetaPequenasBontanas">Pequeñas Botanas</h5>
+       @if(Model.PequenasBotanas.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PequenasBotanas[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PequenasBotanas[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PequenasBotanas[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PequenasBotanas) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregadas </h6> <br/><br/><br/>}
+
+       <h5 class="etiquetaAperitivos">Aperitivos</h5>
+       @if(Model.Aperitivos.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aperitivos[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aperitivos[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aperitivos[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Aperitivos) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregados </h6> <br/><br/><br/>}
+
+       <h5 class="etiquetaSopasEnsaladas">Sopas y Ensaladas</h5>
+       @if(Model.SopasYEnsaladas.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SopasYEnsaladas[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SopasYEnsaladas[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SopasYEnsaladas[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.SopasYEnsaladas) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregadas </h6> <br/><br/><br/>}
+   
+    </div>    
+    
+    <div class="element"> 
+
+       <h5 class="etiquetaPrincipales">Platos Principales</h5>
+       @if(Model.Principales.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Principales[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Principales[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Principales[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Principales) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregadas </h6> <br/><br/><br/>}
+
+       <h5 class="etiquetaPostres">Postres</h5>
+       @if(Model.Postres.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Postres[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Postres[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Postres[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Postres) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregados </h6> <br/><br/><br/>}
+
+       <h5 class="etiquetaBebidas">Bebidas</h5>
+       @if(Model.Bebidas.Count>0){
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bebidas[0].Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bebidas[0].Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bebidas[0].Imagen)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Bebidas) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Imagen)" height="100px" width="100px" class="rounded-circle"> </img>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+           </table>
+       }
+       else{ <br/> <h6> No hay agregadas </h6> <br/><br/><br/>}
+
+    </div>
+
+</div>
+
+<br/>
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+

@@ -16,3 +16,65 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.element {
+    display: inline-block;
+    width: 600px;
+    height: auto;
+    position:center;
+}
+
+h5 {
+    text-align: center;
+}
+
+.etiquetaEntrada {
+    position: center;
+    border-style:double;
+    border-color:aqua;
+    background-color: aquamarine;
+}
+
+.etiquetaPequenasBontanas{
+    position: center;
+    border-style: double;
+    border-color: lightpink;
+    background-color: pink;
+}
+
+.etiquetaAperitivos {
+    color:aliceblue;
+    position: center;
+    border-style: double;
+    border-color: cornflowerblue;
+    background-color: darkslateblue;
+}
+
+.etiquetaPrincipales {
+    position: center;
+    border-style: double;
+    border-color: chocolate;
+    background-color: coral;
+}
+
+.etiquetaSopasEnsaladas {
+    position: center;
+    border-style: double;
+    border-color: darkred;
+    background-color: lightcoral;
+}
+
+.etiquetaPostres {
+    position: center;
+    border-style: double;
+    border-color: orangered;
+    background-color: navajowhite;
+}
+
+.etiquetaBebidas {
+    color: ghostwhite;
+    position: center;
+    border-style: double;
+    border-color: darkmagenta;
+    background-color: mediumpurple;
+}

@@ -1,32 +1,31 @@
 ﻿@model GestorDeRestaurante.UI.Models.Platillo
 
 @{
-    ViewData["Title"] = "Agregar";
+    ViewData["Title"] = "Editar";
 }
 
+<h1>Editar</h1>
 
-<h4>Nuevo Platillo</h4>
+<h4>Platillo</h4>
 <br/>
- 
-
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Agregar" enctype="multipart/form-data" method="post">
+        <form asp-action="Editar"  enctype="multipart/form-data" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-
+            
             <br/>
             <div class="form-group">
                 <label asp-for="Categoria" class="control-label"></label>
                  <br />
-                <select asp-for="Categoria" class="form-control" asp-items="Html.GetEnumSelectList<Categoria>() ">
+                <select asp-for="Categoria" class="form-control" asp-items="Html.GetEnumSelectList<Categoria>()">
                 </select>
                 <span asp-validation-for="Categoria" class="text-danger"></span>
             </div>
@@ -48,10 +47,10 @@
                     <span asp-validation-for="Imagen" class="text-danger"></span>
                 </dd>
             </dl>
-
+            
             <br/>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-success" />
+                 <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </form>
     </div>

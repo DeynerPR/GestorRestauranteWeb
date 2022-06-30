@@ -20,13 +20,12 @@ namespace GestorDeRestaurante.UI.Models
 
         [Required(ErrorMessage = "Campo requerido")]
         [Range(0, float.MaxValue, ErrorMessage = "Ingrese un valor válido")]
-        public float Precio { get; set; }
+        public double Precio { get; set; }
 
 
         [Required(ErrorMessage = "Pon una Imagen")]
         [AllowedExtensions(new string[] { ".jpg", ".png" })]
         public IFormFile Imagen { get; set; }
-
 
     }
 }

@@ -8,7 +8,7 @@ namespace GestorDeRestaurante.UI.Controllers
     public class IngredienteController : Controller
     {
 
-        // GET: IngredienteController
+        //GET: IngredienteController
         public async Task<IActionResult> Index()
         {
 
@@ -29,14 +29,13 @@ namespace GestorDeRestaurante.UI.Controllers
             }
 
             return View(losPlatillosDetallados);
-        }
+        }//Fin 
 
 
-
-        // GET: EstudianteController/Details/5
+        //GET: IngredienteController
         public async Task<IActionResult> Detalles(int Id)
         {
-            Model.DetalleDelIngrediente elDetalleDelIngrediente = new Model.DetalleDelIngrediente();
+            Model.DetalleDelIngrediente elDetalleDelIngrediente;
 
             try
 
@@ -56,30 +55,28 @@ namespace GestorDeRestaurante.UI.Controllers
             catch (Exception ex)
             {
                 throw ex;
-
             }
 
             return View(elDetalleDelIngrediente);
-        }
+
+        }//Fin 
 
 
-
-
-
-        // GET: IngredienteController/Agregar
+        //POST: IngredienteController
         public ActionResult Agregar()
         {
             return View();
-        }
+        }//Fin 
 
-        // POST: IngredienteController/Agregar
+
+        //POST: IngredienteController
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Agregar(Models.Ingrediente ingrediente)
         {
             try
             {
-                GestorDeRestaurante.Model.Ingrediente elIngrediente = new Model.Ingrediente();
+                Model.Ingrediente elIngrediente = new Model.Ingrediente();
 
                 elIngrediente.Id = ingrediente.Id;
                 elIngrediente.Nombre = ingrediente.Nombre;
@@ -102,10 +99,10 @@ namespace GestorDeRestaurante.UI.Controllers
             {
                 return View();
             }
-        }//Fin metodo
+        }//Fin 
 
 
-        // GET: IngredienteController/Editar
+        //GET: IngredienteController
         public async Task<IActionResult> Editar(int Id)
         {
 
@@ -134,9 +131,11 @@ namespace GestorDeRestaurante.UI.Controllers
             }
 
             return View(elIngrediente);
-        }
+        
+        }//Fin 
 
-        // POST: IngredienteController/Editar
+
+        //POST: IngredienteController
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(Model.Ingrediente ingrediente)
@@ -164,10 +163,12 @@ namespace GestorDeRestaurante.UI.Controllers
                 return View();
 
             }
-        }
+        }//Fin 
 
 
  
+
+
 
 
     }//FIN CLASE
