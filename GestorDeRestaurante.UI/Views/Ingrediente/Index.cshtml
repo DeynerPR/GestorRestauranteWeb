@@ -7,8 +7,10 @@
 <h1>Catálogo de Ingredientes</h1>
 
 <p>
-    <a asp-action="Agregar">Agregar</a>
+    <a asp-action="Agregar">Nuevo Ingrediente</a>
 </p>
+
+<br/>
 <table class="table">
     <thead>
         <tr>
@@ -32,7 +34,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-                @Html.ActionLink("Detalles", "Detalles", new { id=item.Id }) 
+                @Html.ActionLink("Detalle", "Detalle", new { id=item.Id }) 
             </td>
         </tr>
 }

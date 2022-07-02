@@ -92,7 +92,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
 
         //GET: MenuController
-        public async Task<IActionResult> Detalles(int Id)
+        public async Task<IActionResult> Detalle(int Id)
         {
             Model.Platillo elDatelleDelPlatillo;
 
@@ -217,7 +217,6 @@ namespace GestorDeRestaurante.UI.Controllers
             IFormFile file = new FormFile(stream, 0, imagen.Length, "Imagen", "Name");
             return file;
         }//Fin metodo
-
 
 
 

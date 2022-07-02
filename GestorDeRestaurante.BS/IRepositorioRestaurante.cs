@@ -20,10 +20,15 @@ namespace GestorDeRestaurante.BS
 
         //Ingredientes
         public List<Model.Ingrediente> ObtengaLaListaDeIngredientes();      //Lista
+        List<Mesa> ObtengaLaListaDeMesas();
         public void AgregueElIngrediente(Model.Ingrediente ingrediente);    //Agregue
         public void EditarIngrediente(Model.Ingrediente ingrediente);       //Editar
         public Model.DetalleDelIngrediente ObtengaElDetalleDelIngrediente(int idIngredienteElegido); //Detalle
-        public Model.Ingrediente ObtenerIngredientePorId(int Id);           
+        Mesa ObtengaElDetalleDeMesa(int id);
+        public Model.Ingrediente ObtenerIngredientePorId(int Id);
+
+
+        //MenuIngredientes
 
 
 
@@ -31,22 +36,28 @@ namespace GestorDeRestaurante.BS
         public List<Platillo> ObtengaLosPlatillosDelMenu();             //Lista
         public void AgregueElPlatillo(Platillo elPlatillo);             //Agregue
         public void EditarPlatillo(Platillo elPlatillo);                //Editar
+        void AgregueLaMesa(Mesa laMesa);
         public Model.Platillo ObtengaElDetalleDelPlatillo(int id);      //Detalle
         public Model.Platillo ObtenerPlatilloPorId(int Id);
         public Model.MenuCompleto ObtenerMenuCompleto();
-        
-
-
-         //MenuIngredientes
-
-
-
-
-            //Mesa (Mesas)
+        Mesa ObtenerMesaPorId(int id);
+        void EditarMesa(Mesa laMesa);
+        void DeshabiliteLaMesa(Mesa laMesa);
+        void HabiliteLaMesa(Mesa laMesa);
 
 
 
-            //Orden (MesaOrden)
 
-        }
+
+
+
+        //Mesa (Mesas)
+
+
+
+
+
+        //Orden (MesaOrden)
+
+    }
 }

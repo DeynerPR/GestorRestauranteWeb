@@ -1,17 +1,18 @@
-﻿@model GestorDeRestaurante.UI.Models.Ingrediente
+﻿@model GestorDeRestaurante.UI.Models.Mesa
 
 @{
     ViewData["Title"] = "Agregar";
 }
 
-<h1>Nuevo Ingrediente</h1>
 
-<h4>Información</h4>
+<h4>Nueva Mesa</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Agregar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -19,7 +20,13 @@
             </div>
             <br/>
             <div class="form-group">
-                <input type="submit" value="Aceptar" class="btn btn-success" />
+                <label asp-for="Estado" class="control-label"></label>
+                <label asp-for="Estado" class="form-control">@Html.DisplayFor(modelItem => Model.Estado)</label>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </form>
     </div>
@@ -27,10 +34,9 @@
 
 <br/>
 <div>
-    <a asp-action="Index">Volver al catálogo de Ingredientes</a>
+    <a asp-action="Index">Volver al catálogo de Mesas</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

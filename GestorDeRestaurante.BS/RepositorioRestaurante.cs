@@ -170,6 +170,7 @@ namespace GestorDeRestaurante.BS
             List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
             List<Medida> lasMedidas = ObtengaLaListaDeMedidas();
             List<Platillo> losPlatillos = ObtengaLosPlatillosDelMenu();
+            elDetalleDelIngrediente.Id = idIngredienteElegido;
             elDetalleDelIngrediente.Nombre = ObtengaElNombreDelIngrediente(idIngredienteElegido, losIngredientes);
 
 
@@ -386,6 +387,108 @@ namespace GestorDeRestaurante.BS
 
             return existe;
         }//Fin metodo
+
+
+
+
+
+
+
+        //Mesas::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+        //      -------Publicos------
+
+        public List<Mesa> ObtengaLaListaDeMesas()
+        {
+            var resultado = from c in ElContextoBD.Mesas select c;
+            List<Mesa> lasMesas = resultado.ToList();
+
+            return lasMesas;
+        }//Fin metodo
+
+        public void AgregueLaMesa(Mesa laMesa)
+        {
+            bool existe = ExisteLaMesa(laMesa.Nombre);
+
+            if (existe == false)
+            {
+                ElContextoBD.Mesas.Add(laMesa);
+                ElContextoBD.SaveChanges();
+            }//Fin if
+        }//Fin metodo
+
+        public void EditarMesa(Mesa laMesa)
+        {
+            Model.Mesa laMesaAModificar = new Mesa();
+
+            laMesaAModificar = ObtenerMesaPorId(laMesa.Id);
+
+            laMesaAModificar.Nombre = laMesa.Nombre;
+            laMesaAModificar.Estado = laMesa.Estado;
+
+            ElContextoBD.Mesas.Update(laMesaAModificar);
+            ElContextoBD.SaveChanges();
+        }//Fin metodo
+
+        public Mesa ObtengaElDetalleDeMesa(int id)
+        {
+            Mesa laMesa = ElContextoBD.Mesas.Find(id);
+            return laMesa;
+        }//Fin metodo
+
+        public Mesa ObtenerMesaPorId(int id)
+        {
+            Model.Mesa laMesa;
+
+            laMesa = ElContextoBD.Mesas.Find(id);
+
+            return laMesa;
+        }//Fin metodo
+
+
+        //      -------Privados------
+
+        private bool ExisteLaMesa(string nombre)
+        {
+            bool existe; existe = false;
+            List<Mesa> lasMesas = ObtengaLaListaDeMesas();
+
+            foreach (Mesa estaMesa in lasMesas)
+            {
+                if (estaMesa.Nombre.Equals(nombre))
+                {
+                    existe = true;
+                    break;
+                }//Fin if
+            }//Fin foreach
+
+            return existe;
+        }//Fin metodo
+
+
+        public void HabiliteLaMesa(Model.Mesa laMesa)
+        {
+            if (laMesa.Estado == Estado.NoDisponible)
+            {
+                laMesa.Estado = Model.Estado.Disponible;
+            }//Fin if
+            ElContextoBD.Mesas.Update(laMesa);
+            ElContextoBD.SaveChanges();
+
+        }//Fin metodo
+
+
+        public void DeshabiliteLaMesa(Model.Mesa laMesa)
+        {
+            if (laMesa.Estado == Estado.Disponible)
+            {
+                laMesa.Estado = Model.Estado.NoDisponible;
+            }//Fin if
+            ElContextoBD.Mesas.Update(laMesa);
+            ElContextoBD.SaveChanges();
+        }//Fin metodo
+
 
 
 

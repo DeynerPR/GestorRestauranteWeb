@@ -33,7 +33,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
 
         //GET: IngredienteController
-        public async Task<IActionResult> Detalles(int Id)
+        public async Task<IActionResult> Detalle(int Id)
         {
             Model.DetalleDelIngrediente elDetalleDelIngrediente;
 

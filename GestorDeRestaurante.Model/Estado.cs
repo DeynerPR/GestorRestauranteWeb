@@ -10,8 +10,6 @@ namespace GestorDeRestaurante.Model
     public enum Estado
     {
         Disponible = 1,
-
-        [Display(Name = "No Disponible")]
         NoDisponible = 2
     }
 }

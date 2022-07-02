@@ -1,11 +1,12 @@
 ﻿ @model GestorDeRestaurante.Model.DetalleDelIngrediente
 @{
-    ViewData["Title"] = "Detalles";
+    ViewData["Title"] = "Detalle";
 }
 
-<h4>Detalles del Ingrediente</h4>
 <br/>
+<h4>Detalle del Ingrediente</h4>
 
+<br/>
 <div>
     <hr />
     <dl class="row">
@@ -64,5 +65,6 @@ else{
 
 <br/>
 <div>
-    <a asp-action="Index">Volver a lista de ingredientes</a>
+    <a asp-action="Index">Volver al catálogo de Ingredientes</a> |  
+    @Html.ActionLink("Editar", "Editar", new { id = Model.Id })
 </div>

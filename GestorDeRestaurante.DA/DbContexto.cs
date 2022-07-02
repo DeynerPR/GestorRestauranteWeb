@@ -17,6 +17,9 @@ namespace GestorDeRestaurante.DA
         public DbSet<GestorDeRestaurante.Model.Medida> Medidas { get; set; }
         public DbSet<GestorDeRestaurante.Model.Platillo> Menu { get; set; }
         public DbSet<GestorDeRestaurante.Model.MenuIngredientes> MenuIngredientes { get; set; }
+        public DbSet<GestorDeRestaurante.Model.Mesa> Mesas { get; set; }
+        public DbSet<GestorDeRestaurante.Model.Orden> Ordens { get; set; }
+
 
 
 

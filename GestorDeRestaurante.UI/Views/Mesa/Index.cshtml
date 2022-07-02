@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GestorDeRestaurante.UI.Models.Mesa>;
+@using GestorDeRestaurante.Model;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Catálogo de Mesas</h1>
+
+
+
+<p>
+    <a asp-action="Agregar">Nueva Mesa</a>
+</p>
+
+
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+                @Html.ActionLink("Detalle", "Detalle", new { id=item.Id}) |
+                @Html.ActionLink("Habilitar", "HabiliteLaMesa", new { id=item.Id }) |
+                @Html.ActionLink("Deshabilitar", "DeshabilitLaMesa", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
