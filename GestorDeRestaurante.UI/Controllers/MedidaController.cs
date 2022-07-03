@@ -8,6 +8,7 @@ namespace GestorDeRestaurante.UI.Controllers
     public class MedidaController : Controller
     {
 
+
         //GET: MedidaController
         public async Task<IActionResult> Index()
         {
@@ -31,6 +32,7 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(laListaDeMedidas);
 
         }//Fin 
+
 
 
         // GET: MedidaController/Agregar
@@ -72,6 +74,7 @@ namespace GestorDeRestaurante.UI.Controllers
                 return View();
             }
         }//Fin 
+
 
 
         // GET: MedidaController/Editar
@@ -136,6 +139,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
             }
         }//Fin 
+
 
 
         // GET: MedidaController/Detalle

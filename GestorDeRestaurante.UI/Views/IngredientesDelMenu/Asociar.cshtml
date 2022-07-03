@@ -1,0 +1,49 @@
+﻿@model GestorDeRestaurante.UI.Models.MenuIngredienteAsociar
+
+@{
+    ViewData["Title"] = "Asociar";
+}
+
+<h1>Asociar Ingrediente</h1>
+
+<h4>Información</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Asociar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreIngrediente" class="control-label"></label>
+                <input asp-for="NombreIngrediente" class="form-control" />
+                <span asp-validation-for="NombreIngrediente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMedida" class="control-label"></label>
+                <input asp-for="NombreMedida" class="form-control" />
+                <span asp-validation-for="NombreMedida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorAproximado" class="control-label"></label>
+                <input asp-for="ValorAproximado" class="form-control" />
+                <span asp-validation-for="ValorAproximado" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Aceptar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

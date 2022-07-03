@@ -11,5 +11,6 @@ namespace GestorDeRestaurante.Model
 
         Solicitada = 1,
         Servida = 2
+
     }
 }

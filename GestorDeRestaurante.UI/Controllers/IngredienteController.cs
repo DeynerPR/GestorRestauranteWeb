@@ -32,6 +32,7 @@ namespace GestorDeRestaurante.UI.Controllers
         }//Fin 
 
 
+
         //GET: IngredienteController
         public async Task<IActionResult> Detalle(int Id)
         {
@@ -60,6 +61,7 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(elDetalleDelIngrediente);
 
         }//Fin 
+
 
 
         //POST: IngredienteController
@@ -102,6 +104,7 @@ namespace GestorDeRestaurante.UI.Controllers
         }//Fin 
 
 
+
         //GET: IngredienteController
         public async Task<IActionResult> Editar(int Id)
         {
@@ -135,6 +138,7 @@ namespace GestorDeRestaurante.UI.Controllers
         }//Fin 
 
 
+
         //POST: IngredienteController
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -164,10 +168,6 @@ namespace GestorDeRestaurante.UI.Controllers
 
             }
         }//Fin 
-
-
- 
-
 
 
 

@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace GestorDeRestaurante.UI.Models
 {
-    public class PlatilloIngredientes
+    public class MenuIngrediente
     {
         public int Id { get; set; }
 
-        public int PlatilloId { get; set; }
+        public int Id_Menu { get; set; }
 
-        public int IngredienteId { get; set; }
+        public int Id_Ingredientes { get; set; }
+        public string NombreIngrediente { get; set; }
 
-        public int MedidaId { get; set; }
+        public int Id_Medidas { get; set; }
+        public string NombreMedida { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
-        public int Cantidad { get; set; }
+        public double Cantidad { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Valor Aproximado")]

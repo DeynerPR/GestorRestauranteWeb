@@ -10,8 +10,8 @@ namespace GestorDeRestaurante.UI.Models
     public class Orden
     {
         public int Id { get; set; }
-        public int MesaId { get; set; }
-        public int PlatilloId { get; set; }
+        public int Id_Mesa { get; set; }
+        public int Id_Menu { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
         public int Cantidad { get; set; }

@@ -18,5 +18,6 @@ namespace GestorDeRestaurante.Model
         public Estado Estado { get; set; }
 
         public List<Model.Orden> OrdenesAsociadas { get; set; }
+
     }
 }

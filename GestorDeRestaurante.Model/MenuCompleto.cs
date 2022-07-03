@@ -34,7 +34,5 @@ namespace GestorDeRestaurante.Model
         public List<Platillo> Bebidas { get; set; }
 
 
-
-
     }//Fin class
 }

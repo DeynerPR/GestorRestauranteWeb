@@ -58,10 +58,6 @@ namespace GestorDeRestaurante.SI.Controllers
 
 
 
-
-
-
-
         // PUT api/<MesaController>
         [HttpPut("EditarMesa")]
         public IActionResult EditarMesa([FromBody] GestorDeRestaurante.Model.Mesa laMesa)
@@ -77,7 +73,6 @@ namespace GestorDeRestaurante.SI.Controllers
                 return BadRequest(ModelState);
             }
         }//Fin 
-
 
 
 
@@ -125,11 +120,6 @@ namespace GestorDeRestaurante.SI.Controllers
                 return BadRequest(ModelState);
             }
         }//Fin 
-
-
-
-
-
 
 
 

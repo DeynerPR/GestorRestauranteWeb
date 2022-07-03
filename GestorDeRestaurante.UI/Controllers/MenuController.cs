@@ -10,7 +10,6 @@ namespace GestorDeRestaurante.UI.Controllers
     {
 
 
-
         // GET: MenuController
         public async Task<IActionResult> Index()
         {
@@ -36,6 +35,7 @@ namespace GestorDeRestaurante.UI.Controllers
 
             return View(losPlatillosRecibidos);
         }//Fin 
+
 
 
         //POST: MenuController
@@ -91,6 +91,7 @@ namespace GestorDeRestaurante.UI.Controllers
         }//Fin 
 
 
+
         //GET: MenuController
         public async Task<IActionResult> Detalle(int Id)
         {
@@ -119,7 +120,6 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(elDatelleDelPlatillo);
 
         }//Fin metodo
-
 
 
 
@@ -216,6 +216,7 @@ namespace GestorDeRestaurante.UI.Controllers
             var stream = new MemoryStream(imagen);
             IFormFile file = new FormFile(stream, 0, imagen.Length, "Imagen", "Name");
             return file;
+
         }//Fin metodo
 
 
@@ -240,8 +241,6 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(elMenuCompleto);
 
         }//Fin metodo
-
-
 
 
 

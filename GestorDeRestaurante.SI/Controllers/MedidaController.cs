@@ -12,7 +12,7 @@ namespace GestorDeRestaurante.SI.Controllers
         public MedidaController(BS.IRepositorioRestaurante repositorio)
         {
             ElRepositorio = repositorio;
-        }//Fin constructor
+        }
 
 
 
@@ -23,7 +23,7 @@ namespace GestorDeRestaurante.SI.Controllers
             List<Model.Medida> lasMedidas = ElRepositorio.ObtengaLaListaDeMedidas();
             
             return lasMedidas;
-        }//Fin 
+        }
 
 
 
@@ -41,7 +41,7 @@ namespace GestorDeRestaurante.SI.Controllers
             {
                 return BadRequest(ModelState);
             }
-        }//Fin 
+        }
 
 
 
@@ -53,7 +53,7 @@ namespace GestorDeRestaurante.SI.Controllers
             laMedida = ElRepositorio.ObtenerMedidaPorId(id);
 
             return laMedida;
-        }//Fin 
+        }
 
 
 
@@ -72,11 +72,9 @@ namespace GestorDeRestaurante.SI.Controllers
             {
                 return BadRequest(ModelState);
             }
-        }//Fin 
+        }
 
 
 
-
-
-    }//Fin class
+    }
 }

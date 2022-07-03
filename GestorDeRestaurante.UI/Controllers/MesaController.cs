@@ -33,6 +33,8 @@ namespace GestorDeRestaurante.UI.Controllers
             return View(DemeLasMesasConvertidas(lasMesas));
         }//Fin 
 
+
+
         private List<Models.Mesa> DemeLasMesasConvertidas(List<Model.Mesa> lasMesas)
         {
             List<Models.Mesa> lasMesasData = new List<Models.Mesa>();
@@ -48,8 +50,6 @@ namespace GestorDeRestaurante.UI.Controllers
             }//Fin foreach
             return lasMesasData;
         }//Fin metodo
-
-
 
 
 
@@ -169,6 +169,7 @@ namespace GestorDeRestaurante.UI.Controllers
         }//Fin 
 
 
+
         // GET: MesaController/Detalle
         public async Task<IActionResult> Detalle(int Id)
         {
@@ -282,10 +283,4 @@ namespace GestorDeRestaurante.UI.Controllers
 
 
     }//Fin class
-
-
-
-
-
-
 }

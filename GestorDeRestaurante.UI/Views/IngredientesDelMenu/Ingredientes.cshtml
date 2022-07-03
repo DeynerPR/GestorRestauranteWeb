@@ -1,0 +1,57 @@
+﻿@model GestorDeRestaurante.Model.PlatilloIngredientesMostrar
+
+@{
+    ViewData["Title"] = "Ingredientes";
+}
+
+<h1>Lista de Ingredientes</h1>
+
+<p>
+    <a asp-action="Asociar">Asociar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre del Ingrediente
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Nombre de la Medida
+            </th>
+            <th>
+                Valor Aproximado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model.ListaDeIngredientes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreIngrediente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMedida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorAproximado)
+            </td>
+            <td>
+                @Html.ActionLink("Desasociar", "Desasociar", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<br/>
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>

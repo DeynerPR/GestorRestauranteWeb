@@ -11,5 +11,6 @@ namespace GestorDeRestaurante.Model
     {
         Disponible = 1,
         NoDisponible = 2
+
     }
 }
