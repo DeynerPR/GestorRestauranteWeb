@@ -59,14 +59,14 @@ namespace GestorDeRestaurante.SI.Controllers
 
         // PUT api/<MedidaController>
         [HttpPut("EditarMedida")]
-        public IActionResult EditarMedida([FromBody] GestorDeRestaurante.Model.Platillo elPlatillo)
+        public IActionResult EditarMedida([FromBody] GestorDeRestaurante.Model.Medida laMedida)
         {
 
             if (ModelState.IsValid)
             {
-                ElRepositorio.EditarPlatillo(elPlatillo);
+                ElRepositorio.EditarMedida(laMedida);
 
-                return Ok(elPlatillo);
+                return Ok(laMedida);
             }
             else
             {

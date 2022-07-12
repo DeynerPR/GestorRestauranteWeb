@@ -4,7 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Catálogo de Ingredientes del Menú</h1>
+<h1>Catálogo de Menú e Ingredientes</h1>
+
 
 <table class="table">
     <thead>
@@ -34,7 +35,8 @@
                 @Html.DisplayFor(modelItem => item.Ganancia)
             </td>
             <td>
-                @Html.ActionLink("Ingredientes", "Ingredientes", new { id=item.Id })
+                @Html.ActionLink("Asociar", "Asociar", new { id=item.Id }) |
+                @Html.ActionLink("Desasociar", "Desasociar", new { id=item.Id })
             </td>
         </tr>
 }

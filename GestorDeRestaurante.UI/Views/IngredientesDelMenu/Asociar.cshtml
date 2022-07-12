@@ -1,47 +1,72 @@
-﻿@model GestorDeRestaurante.UI.Models.MenuIngredienteAsociar
+﻿@model GestorDeRestaurante.Model.MenuIngredienteAsociar
 
 @{
     ViewData["Title"] = "Asociar";
 }
 
-<h1>Asociar Ingrediente</h1>
+<h1>InicioAsociar</h1>
 
-<h4>Información</h4>
+<h4>MenuIngredienteAsociar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Asociar">
+        <form id="elFormulario" asp-action="AsociarPost" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreIngrediente" class="control-label"></label>
-                <input asp-for="NombreIngrediente" class="form-control" />
-                <span asp-validation-for="NombreIngrediente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreMedida" class="control-label"></label>
-                <input asp-for="NombreMedida" class="form-control" />
-                <span asp-validation-for="NombreMedida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValorAproximado" class="control-label"></label>
-                <input asp-for="ValorAproximado" class="form-control" />
-                <span asp-validation-for="ValorAproximado" class="text-danger"></span>
-            </div>
+            
+            <br/>
+            <label class="control-label">Ingrediente</label>
+            <select asp-for="laListaDeIngredientes" id = "SelectIngredientes" class="form-select">
+                @{
+                    for (int contadorI = 0; contadorI < Model.laListaDeIngredientes.Count; contadorI++)
+                    {
+                        string elNombre = @Model.laListaDeIngredientes[contadorI];
+                            <option value="@elNombre" > @elNombre </option>
+                    }
+                 }
+            </select>
+
+            <br/>
+            <label class="control-label">Medida</label>
+            <select asp-for="laListaDeMedidas" id = "SelectMedidas" class="form-select">
+                 @{
+                  for (int contadorM = 0; contadorM < Model.laListaDeMedidas.Count; contadorM++)
+                    {
+                        string elNombre = @Model.laListaDeMedidas[contadorM];
+                            <option value="@elNombre" > @elNombre </option>
+                    }
+                 }
+            </select>
+          
             <br/>
             <div class="form-group">
-                <input type="submit" value="Aceptar" class="btn btn-success" />
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" type="number"/>
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+            <br/>
+            <div class="form-group">
+                <label asp-for="ValorAproximado" class="control-label"></label>
+                <input asp-for="ValorAproximado" class="form-control" type="number"/>
+                <span asp-validation-for="ValorAproximado" class="text-danger"></span>
+            </div>
+            
+            <br/>
+            <div class="form-group">
+                <input asp-for="Id_menu" class="form-control" type="number" value="@Model.Id_menu" hidden/>
+            </div>
+
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
 <br/>
 <div>
-    <a asp-action="Index">Volver a la Lista</a>
+    <a asp-action="Index">Volver al catálogo Menu e Ingredientes</a>
 </div>
 
 @section Scripts {

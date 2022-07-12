@@ -16,4 +16,8 @@
     <ProjectReference Include="..\GestorDeRestaurante.Model\GestorDeRestaurante.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GestorDeRestaurante\" />
+  </ItemGroup>
+
 </Project>

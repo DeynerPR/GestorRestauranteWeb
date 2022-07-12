@@ -28,14 +28,12 @@ namespace GestorDeRestaurante.BS
         public Model.Ingrediente ObtenerIngredientePorId(int Id);
 
 
-
         //MenuIngredientes
-        public List<PlatilloIngredientesMostrar> ConviertaLosPlatillosParaMostrar(List<Platillo> losPlatillos);
-        public PlatilloIngredientesMostrar ConviertaElPlatilloParaMostrar(Platillo elPlatillo);
-        public List<MenuIngrediente> ObtengaLaListaDeIngredientesDelMenu();
-        public PlatilloIngredientesMostrar ObtengaLaListaDeIngredientesDelPlatillo(int id);
-        public void AsocieElIngrediente(Model.MenuIngredienteMostrar ingrediente);
-        public void RemuevaElIngrediente(int idIngrediante);
+        public List<Model.PlatilloIngredientesMostrar> ObtengaLosPlatillosAMostrar();
+        public MenuIngredienteAsociar ObtengaElPlatilloConDatosAsociados(int id);
+        public MenuIngredienteAsociar ObtengaElPlatilloConDatosAAsociar(int id);
+        public void AsocieAlPlatillo(Model.MenuIngredienteAsociar elMenuIngrediente);
+        public void DesasocieAlPlatillo(Model.MenuIngredienteAsociar elMenuIngrediente);
 
 
         //Menu
@@ -46,7 +44,7 @@ namespace GestorDeRestaurante.BS
         public Model.Platillo ObtengaElDetalleDelPlatillo(int id);      //Detalle
         public Model.Platillo ObtenerPlatilloPorId(int Id);
         public Model.MenuCompleto ObtenerMenuCompleto();
-        Mesa ObtenerMesaPorId(int id);
+        public Mesa ObtenerMesaPorId(int id);
         void EditarMesa(Mesa laMesa);
         void DeshabiliteLaMesa(Mesa laMesa);
         void HabiliteLaMesa(Mesa laMesa);

@@ -381,47 +381,46 @@ namespace GestorDeRestaurante.BS
 
 
         //IngredientesDelMenu::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+        //      -------Publicos------
         
-        public List<PlatilloIngredientesMostrar> ConviertaLosPlatillosParaMostrar(List<Platillo> losPlatillos)
+        public List<PlatilloIngredientesMostrar> ObtengaLosPlatillosAMostrar()
         {
-            List<Model.PlatilloIngredientesMostrar> losPlatillosPorMostrar = new List<PlatilloIngredientesMostrar>();
-            List<MenuIngrediente> losIngredientesDelMenu = ObtengaLaListaDeIngredientesDelMenu();
-            List<MenuIngrediente> laListaDeIngredientesFiltrada = new();
+            List<Platillo> losPlatillos = ObtengaLosPlatillosDelMenu();
 
-            foreach (var item in losPlatillos)
+            List<PlatilloIngredientesMostrar> losPlatillosAMostrar = new List<PlatilloIngredientesMostrar>();
+            PlatilloIngredientesMostrar elPlatilloAMostrar;
+            
+            List<MenuIngrediente> losMenuIngredienteFiltrado;
+            int laSumaDeAproximados = 0;
+
+            List<int> idsAnalizados = new List<int>();
+            foreach (var esteRegistro in losPlatillos)
             {
-                Model.PlatilloIngredientesMostrar elPlatilloParaMostrar = new PlatilloIngredientesMostrar();
+                if (!idsAnalizados.Contains(esteRegistro.Id)) {
+                    idsAnalizados.Add(esteRegistro.Id);
 
-                elPlatilloParaMostrar.Id = item.Id;
-                elPlatilloParaMostrar.Nombre = item.Nombre;
-                elPlatilloParaMostrar.Precio = item.Precio;
+                    losMenuIngredienteFiltrado = ObtengaLosRegistrosDeEsteMenuEnMenuIngredientes(esteRegistro.Id);
 
-                laListaDeIngredientesFiltrada = losIngredientesDelMenu.Where(x => x.Id_Menu == item.Id).ToList();
-                int sumaValoresAproximados = laListaDeIngredientesFiltrada.Sum(item => item.ValorAproximado);
+                    foreach (var esteR in losMenuIngredienteFiltrado)
+                    {
+                        laSumaDeAproximados += esteR.ValorAproximado;
+                    }//Fin foreach
 
-                elPlatilloParaMostrar.Ganancia = (double)elPlatilloParaMostrar.Precio - sumaValoresAproximados;
+                    elPlatilloAMostrar = new PlatilloIngredientesMostrar();
+                    elPlatilloAMostrar.Id = esteRegistro.Id;
+                    elPlatilloAMostrar.Nombre = ElContextoBD.Menu.Find(esteRegistro.Id).Nombre;
+                    elPlatilloAMostrar.Precio = ElContextoBD.Menu.Find(esteRegistro.Id).Precio;
+                    elPlatilloAMostrar.Ganancia = elPlatilloAMostrar.Precio - laSumaDeAproximados;
+                    laSumaDeAproximados = 0;
+                    losPlatillosAMostrar.Add(elPlatilloAMostrar);
+                }
+            }//Fin foreach
+           
+            return losPlatillosAMostrar;
+        }//Fin metodo
 
-                losPlatillosPorMostrar.Add(elPlatilloParaMostrar);
-
-            }
-
-            return losPlatillosPorMostrar;
-        }
-
-        public PlatilloIngredientesMostrar ConviertaElPlatilloParaMostrar(Platillo elPlatillo)
-        {
-
-            Model.PlatilloIngredientesMostrar elPlatilloParaMostrar = new PlatilloIngredientesMostrar();
-
-            elPlatilloParaMostrar.Id = elPlatillo.Id;
-            elPlatilloParaMostrar.Nombre = elPlatillo.Nombre;
-            elPlatilloParaMostrar.Precio = elPlatillo.Precio;
-            elPlatilloParaMostrar.Ganancia = 0;
-
-            return elPlatilloParaMostrar;
-        }
-
-        public List<MenuIngrediente> ObtengaLaListaDeIngredientesDelMenu()
+        public List<MenuIngrediente> ObtengaLaListaDeMenuIngrediente()
         {
 
             var resultado = from c in ElContextoBD.MenuIngredientes select c;
@@ -430,53 +429,161 @@ namespace GestorDeRestaurante.BS
 
         }
 
-        public PlatilloIngredientesMostrar ObtengaLaListaDeIngredientesDelPlatillo(int idPlatilloElegido)
+        public MenuIngredienteAsociar ObtengaElPlatilloConDatosAsociados(int id) {
+
+            MenuIngredienteAsociar elPlatilloConAsociados = new MenuIngredienteAsociar();
+            elPlatilloConAsociados.Id_menu = id;
+            elPlatilloConAsociados.laListaDeIngredientes = ObtengaNombresDeLosIngredientesAsociadosAlPlatillo(id);
+
+            return elPlatilloConAsociados;
+        }//Fin metodo
+
+        public MenuIngredienteAsociar ObtengaElPlatilloConDatosAAsociar(int id) { 
+            
+            MenuIngredienteAsociar elPlatilloParaAsociar = new MenuIngredienteAsociar();
+            elPlatilloParaAsociar.Id_menu = id;
+            elPlatilloParaAsociar.laListaDeIngredientes = ObtengaNombresDeLosIngredientesDesasociadosAlPlatillo(id);
+            elPlatilloParaAsociar.laListaDeMedidas      = ObtengaNombresDeLasMedidas();
+
+            return elPlatilloParaAsociar;
+        }//Fin metodo
+
+        public void AsocieAlPlatillo(Model.MenuIngredienteAsociar losDatos)
         {
 
-            PlatilloIngredientesMostrar elPlatillo = new();
+            MenuIngrediente elMenuIngrediente = new MenuIngrediente();
 
-            List<MenuIngredienteMostrar> laListaDeIngredientesParaMostrar = new();
-            List<MenuIngredienteMostrar> laListaDeIngredientesFiltrada = new();
+            elMenuIngrediente.Id_Menu = losDatos.Id_menu;
+            elMenuIngrediente.Id_Ingredientes = ObtengaIdIngredientePorNombre(losDatos.elIngredienteSeleccionado);
+            elMenuIngrediente.Id_Medidas = ObtengaIdMedidaPorNombre(losDatos.laMedidaSeleccionada);
+            elMenuIngrediente.Cantidad = losDatos.Cantidad;
+            elMenuIngrediente.ValorAproximado = losDatos.ValorAproximado;
 
-            List<MenuIngrediente> losIngredientesDelMenu = ObtengaLaListaDeIngredientesDelMenu();
-            MenuIngredienteMostrar elIngredientePorDetallar;
+            ElContextoBD.MenuIngredientes.Add(elMenuIngrediente);
+            ElContextoBD.SaveChanges();
 
-            foreach (var item in losIngredientesDelMenu)
+        }//Fin metodo
+
+
+        public void DesasocieAlPlatillo(Model.MenuIngredienteAsociar elMenuIngrediente) {
+
+            int idMenuElegido = elMenuIngrediente.Id_menu;
+            string nombreIngredienteElegido = elMenuIngrediente.laListaDeIngredientes[0];
+
+            string elNombreDelIngrediente;
+            List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
+            List<MenuIngrediente> losMenuIngrediente = ObtengaLaListaDeMenuIngrediente();
+
+            MenuIngrediente elMenu = new MenuIngrediente();
+            foreach (var esteRegistro in losMenuIngrediente)
             {
-                elIngredientePorDetallar = new();
+                elNombreDelIngrediente = ObtengaElNombreDelIngrediente(esteRegistro.Id_Ingredientes, losIngredientes);
+                if (esteRegistro.Id_Menu == idMenuElegido && elNombreDelIngrediente == nombreIngredienteElegido) {
 
-                elIngredientePorDetallar.Id = item.Id;
-                elIngredientePorDetallar.Id_Menu = item.Id_Menu;
-                elIngredientePorDetallar.Id_Ingredientes = item.Id_Ingredientes;
-                elIngredientePorDetallar.Cantidad = item.Cantidad;
-                elIngredientePorDetallar.Id_Medidas = item.Id_Medidas;
-                elIngredientePorDetallar.ValorAproximado = item.ValorAproximado;
+                    elMenu = ElContextoBD.MenuIngredientes.Find(esteRegistro.Id);
+                    ElContextoBD.MenuIngredientes.Remove(elMenu);
+                    ElContextoBD.SaveChanges();
+                    break;
+                }
+            }
+        }//Fin metodo
 
-                elIngredientePorDetallar.NombreIngrediente = ObtenerIngredientePorId(item.Id_Ingredientes).Nombre;
-                elIngredientePorDetallar.NombreMedida = ObtenerMedidaPorId(item.Id_Medidas).Nombre;
 
-                laListaDeIngredientesParaMostrar.Add(elIngredientePorDetallar);
+        //      -------Privados------
 
+        private List<string> ObtengaNombresDeLosIngredientes()
+        {
+            List<string> losNombres = new List<string>();
+            List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
+
+            foreach (var esteIngrediente in losIngredientes)
+            {
+                losNombres.Add(esteIngrediente.Nombre);
+            }//Fin foreach
+
+            return losNombres;
+        }//Fin metodo
+
+        private List<string> ObtengaNombresDeLasMedidas()
+        {
+            List<string> losNombres = new List<string>();
+            List<Medida> lasMedidas = ObtengaLaListaDeMedidas();
+
+            foreach (var estaMedida in lasMedidas)
+            {
+                losNombres.Add(estaMedida.Nombre);
+            }//Fin foreach
+
+            return losNombres;
+        }//Fin metodo
+
+        private List<string> ObtengaNombresDeLosIngredientesAsociadosAlPlatillo(int id)
+        {
+            List<Ingrediente> losIngredientes = ObtengaLaListaDeIngredientes();
+            List<MenuIngrediente> losRegistros = ObtengaLosRegistrosDeEsteMenuEnMenuIngredientes(id);
+
+
+            List<string> losAsociados = new List<string>();
+            
+            string elNombre;
+            foreach (var esteRegistro in losRegistros)
+            {
+                elNombre = ObtengaElNombreDelIngrediente(esteRegistro.Id_Ingredientes, losIngredientes);
+                losAsociados.Add(elNombre);
+            }//Fin metodo
+
+
+            return losAsociados;
+        }//Fin metodo
+
+        private List<string> ObtengaNombresDeLosIngredientesDesasociadosAlPlatillo(int id) {
+
+            List<string> Asociados = ObtengaNombresDeLosIngredientesAsociadosAlPlatillo(id);
+            List<string> Desasociados = ObtengaNombresDeLosIngredientes();
+
+            foreach (var esteAsociado in Asociados) {
+                Desasociados.Remove(esteAsociado);
             }
 
-            laListaDeIngredientesFiltrada = laListaDeIngredientesParaMostrar.Where(x => x.Id_Menu == idPlatilloElegido).ToList();
-            elPlatillo.ListaDeIngredientes = laListaDeIngredientesFiltrada;
+            return Desasociados;
+        }//Fin metodo
 
-            return elPlatillo;
-
-        }
-
-        public void AsocieElIngrediente(Model.MenuIngredienteMostrar ingrediente) 
+        private List<MenuIngrediente> ObtengaLosRegistrosDeEsteMenuEnMenuIngredientes(int id)
         {
+            var resultado = from c in ElContextoBD.MenuIngredientes select c;
+            List<MenuIngrediente> losRegistros = resultado.Where(x => x.Id_Menu == id).ToList();
 
+            return losRegistros;
+        }//Fin metodo
 
-        }
-
-        public void RemuevaElIngrediente(int idIngrediante)
+        private int ObtengaIdMedidaPorNombre(string laMedidaSeleccionada)
         {
+            List<Medida> medidas = ObtengaLaListaDeMedidas();
+            int laId = 0;
+            foreach (var estaMedida in medidas)
+            {
+                if (estaMedida.Nombre == laMedidaSeleccionada)
+                {
+                    laId = estaMedida.Id;
+                    break;
+                }
+            }
+            return laId;
+        }//Fin metodo
 
-
-        }
+        private int ObtengaIdIngredientePorNombre(string elIngredienteSeleccionado)
+        {
+            List<Ingrediente> ingredientes = ObtengaLaListaDeIngredientes();
+            int laId = 0;
+            foreach (var esteIngrediente in ingredientes)
+            {
+                if (esteIngrediente.Nombre == elIngredienteSeleccionado) {
+                    laId = esteIngrediente.Id;
+                    break;
+                }
+            }
+            return laId;
+        }//Fin metodo
 
 
 

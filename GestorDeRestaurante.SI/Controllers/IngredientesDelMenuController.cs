@@ -21,40 +21,49 @@ namespace GestorDeRestaurante.SI.Controllers
         [HttpGet("ObtengaLosPlatillos")]
         public IEnumerable<GestorDeRestaurante.Model.PlatilloIngredientesMostrar> ObtengaLosPlatillos()
         {
-            List<Model.Platillo> losPlatillos = ElRepositorio.ObtengaLosPlatillosDelMenu();
-            List<Model.PlatilloIngredientesMostrar> losPlatillosPorMostrar;
-
-            losPlatillosPorMostrar = ElRepositorio.ConviertaLosPlatillosParaMostrar(losPlatillos);
-
+            List<Model.PlatilloIngredientesMostrar> losPlatillosPorMostrar = ElRepositorio.ObtengaLosPlatillosAMostrar();
 
             return losPlatillosPorMostrar;
         }
 
 
-
         // GET api/<IngredientesDelMenuController>
-        [HttpGet("ObtengaLosIngredientesDelPlatillo")]
-        public GestorDeRestaurante.Model.PlatilloIngredientesMostrar ObtengaLosIngredientesDelPlatillo(string Id)
+        [HttpGet("ObtengaElPlatilloConDatosAAsociar")]
+        public GestorDeRestaurante.Model.MenuIngredienteAsociar ObtengaElPlatilloConDatosAAsociar(string Id)
         {
 
             int id = int.Parse(Id);
-            Model.PlatilloIngredientesMostrar elPlatilloParaMostrar = ElRepositorio.ObtengaLaListaDeIngredientesDelPlatillo(id);
+            Model.MenuIngredienteAsociar elPlatillo = ElRepositorio.ObtengaElPlatilloConDatosAAsociar(id);
 
-            return elPlatilloParaMostrar;
+            return elPlatillo;
+
+        }
+        
+       
+            // GET api/<IngredientesDelMenuController>
+        [HttpGet("ObtengaElPlatilloConDatosAsociados")]
+        public GestorDeRestaurante.Model.MenuIngredienteAsociar ObtengaElPlatilloConDatosAsociados(string Id)
+        {
+
+            int id = int.Parse(Id);
+            Model.MenuIngredienteAsociar elPlatillo = ElRepositorio.ObtengaElPlatilloConDatosAsociados(id);
+
+            return elPlatillo;
 
         }
 
 
 
+
         // POST api/<IngredientesDelMenuController>
-        [HttpPost("AsociarIngrediente")]
-        public IActionResult AsociarIngrediente([FromBody] GestorDeRestaurante.Model.MenuIngredienteMostrar ingrediente)
+        [HttpPost("Asociar")]
+        public IActionResult Asociar([FromBody] GestorDeRestaurante.Model.MenuIngredienteAsociar elMenuIngrediente)
         {
             if (ModelState.IsValid)
             {
-                ElRepositorio.AsocieElIngrediente(ingrediente);
+                ElRepositorio.AsocieAlPlatillo(elMenuIngrediente);
 
-                return Ok(ingrediente);
+                return Ok(elMenuIngrediente);
             }
             else
             {
@@ -64,15 +73,19 @@ namespace GestorDeRestaurante.SI.Controllers
 
 
 
-        [HttpDelete("DesasociarIngrediente")]
-        public IActionResult DesasociarIngrediente(string id)
+        [HttpPost("Desasociar")]
+        public IActionResult Desasociar([FromBody] GestorDeRestaurante.Model.MenuIngredienteAsociar elMenuIngrediente)
         {
-            int Id = int.Parse(id);
+            if (ModelState.IsValid)
+            {
+                ElRepositorio.DesasocieAlPlatillo(elMenuIngrediente);
 
-            ElRepositorio.RemuevaElIngrediente(Id);
-
-            return Ok();
-
+                return Ok(elMenuIngrediente);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
     }

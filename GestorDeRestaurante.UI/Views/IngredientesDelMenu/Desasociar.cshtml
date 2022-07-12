@@ -1,0 +1,48 @@
+﻿@model GestorDeRestaurante.Model.MenuIngredienteAsociar
+
+@{
+    ViewData["Title"] = "Desasociar";
+}
+
+<h1>Desasociar</h1>
+
+<h4>MenuIngredienteAsociar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DesasociarPost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <br/>
+            <label class="control-label">Ingrediente</label>
+            <select asp-for="laListaDeIngredientes" id = "SelectIngredientes" class="form-select">
+                @{
+                    for (int contadorI = 0; contadorI < Model.laListaDeIngredientes.Count; contadorI++)
+                    {
+                        string elNombre = @Model.laListaDeIngredientes[contadorI];
+                            <option value="@elNombre" > @elNombre </option>
+                    }
+                 }
+            </select>
+
+            <br/>
+            <div class="form-group">
+                <input asp-for="Id_menu" class="form-control" type="number" value="@Model.Id_menu" hidden/>
+            </div>
+
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Desasociar" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br/>
+<div>
+    <a asp-action="Index">Volever a Menu e Igredientes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
